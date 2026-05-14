@@ -77,7 +77,7 @@ You are the "Princess AI," the digital concierge for The Princess Thai Massage i
 2. Highlight Key Data: Use **bold text** for prices, phone numbers, and opening hours.
 
 [Core Shop Information]
-- Location: **200 Morneer Address, Riverwood, NSW** (Formerly Angel's Touch).
+- Location: **186 Belmore Rd, Riverwood NSW 2210** (Formerly Angel's Touch).
 - Services: We specialize in Hot Oil Massage and Coconut Oil Massage.
 - Staff: All-female professional therapists.
 - Flat Rate Pricing:
@@ -319,9 +319,13 @@ export default function App() {
               <p className="text-xl md:text-2xl text-neutral-600 font-light mb-12 tracking-wide font-serif italic">
                 Experience the ultimate comfort with our Hot Oil and Coconut Oil treatments.
               </p>
-              <div className="flex gap-6">
-                <a href="#services" className="bg-[#9c77b7] text-white px-10 py-5 rounded-full text-lg font-bold shadow-xl hover:bg-[#8659a3] transition">
-                  Explore Menu & Pricing
+              <div className="flex flex-col sm:flex-row gap-6">
+                <a href="tel:0295338849" className="bg-[#9c77b7] text-white px-10 py-5 rounded-full text-lg font-bold shadow-xl hover:bg-[#8659a3] transition flex items-center justify-center gap-3">
+                  <Phone size={24} />
+                  CALL 02 9533 8849
+                </a>
+                <a href="#services" className="bg-white/80 backdrop-blur-sm text-[#9c77b7] border-2 border-[#9c77b7]/20 px-10 py-5 rounded-full text-lg font-bold shadow-lg hover:bg-white transition flex items-center justify-center">
+                  Explore Menu
                 </a>
               </div>
             </motion.div>
@@ -673,7 +677,7 @@ export default function App() {
                     
                     <div className="lg:w-1/2 min-h-[400px] relative">
                          <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.825126861257!2d151.0503628!3d-33.9456426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12be7c5b6a782d%3A0xc3f5e55e5ca8db96!2sRiverwood%20NSW%202210!5e0!3m2!1sen!2sau!4v1715660000000!5m2!1sen!2sau" 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.7483664053896!2d151.0503628!3d-33.9456426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12be7c5b6a782d%3A0xa6466f8e7a68574!2s186%20Belmore%20Rd%2C%20Riverwood%20NSW%202210%2C%20Australia!5e0!3m2!1sen!2sau!4v1715663672725!5m2!1sen!2sau" 
                             className="w-full h-full border-none pointer-events-none lg:pointer-events-auto"
                             allowFullScreen
                             loading="lazy"
@@ -681,7 +685,7 @@ export default function App() {
                         />
                         <div className="absolute top-10 left-10 right-10 bg-white/95 backdrop-blur p-8 rounded-3xl shadow-2xl">
                              <h4 className="text-[#9c77b7] font-bold uppercase tracking-[0.2em] mb-2">Our Location</h4>
-                             <p className="text-[#2d1b40] font-medium mb-1">200 Morneer Address, Riverwood, NSW</p>
+                             <p className="text-[#2d1b40] font-medium mb-1">186 Belmore Rd, Riverwood NSW 2210</p>
                              <p className="text-sm text-neutral-400 italic">Formerly Angel's Touch</p>
                         </div>
                     </div>
@@ -705,6 +709,19 @@ export default function App() {
       </footer>
 
       <ChatBot />
+
+      {/* Floating Call Button for Mobile */}
+      <div className="md:hidden fixed bottom-28 right-6 z-40">
+        <motion.a
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          whileTap={{ scale: 0.9 }}
+          href="tel:0295338849"
+          className="w-16 h-16 bg-[#9c77b7] text-white rounded-full shadow-2xl flex items-center justify-center border-4 border-white"
+        >
+          <Phone size={28} />
+        </motion.a>
+      </div>
     </div>
   );
 }
