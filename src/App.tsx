@@ -15,6 +15,7 @@ const SERVICES = [
     price: '$50', 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Quick & focused relaxation',
+    video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2F%E0%B8%A7%E0%B8%B4%E0%B8%94%E0%B8%B5%E0%B9%82%E0%B8%AD%E0%B8%99%E0%B8%A7%E0%B8%94%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%AD%E0%B9%82%E0%B8%A3%E0%B8%A1%E0%B9%88%E0%B8%B2.mp4?alt=media&token=51770ab3-15c3-4e09-b612-64bb36b67bde',
     image: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
   },
   { 
@@ -22,14 +23,24 @@ const SERVICES = [
     price: '$70', 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Deep and continuous oil treatment',
-    image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2F%E0%B8%A7%E0%B8%B4%E0%B8%94%E0%B8%B5%E0%B9%82%E0%B8%AD%E0%B8%99%E0%B8%A7%E0%B8%94%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%AD%E0%B9%82%E0%B8%A3%E0%B8%A1%E0%B9%88%E0%B8%B2.mp4?alt=media&token=51770ab3-15c3-4e09-b612-64bb36b67bde',
+    image: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
   },
   { 
     duration: '60 MINS', 
     price: '$80', 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Premium full-body rejuvenation',
+    video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2F%E0%B8%A7%E0%B8%B4%E0%B8%94%E0%B8%B5%E0%B9%82%E0%B8%AD%E0%B8%99%E0%B8%A7%E0%B8%94%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%AD%E0%B9%82%E0%B8%A3%E0%B8%A1%E0%B9%88%E0%B8%B2.mp4?alt=media&token=51770ab3-15c3-4e09-b612-64bb36b67bde',
     image: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+  },
+  { 
+    duration: '90 MINS', 
+    price: '$130', 
+    types: 'HOT OIL | COCONUT OIL',
+    description: 'Signature Deep Therapeutic Healing',
+    video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2F%E0%B8%A7%E0%B8%B4%E0%B8%94%E0%B8%B5%E0%B9%82%E0%B8%AD%E0%B8%99%E0%B8%A7%E0%B8%94%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%AD%E0%B9%82%E0%B8%A3%E0%B8%A1%E0%B9%88%E0%B8%B2.mp4?alt=media&token=51770ab3-15c3-4e09-b612-64bb36b67bde',
+    image: 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
   },
 ];
 
@@ -40,7 +51,7 @@ const REVIEWS = [
 ];
 
 const GALLERY_IMAGES = [
-  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2F01.jpg?alt=media&token=13733c0a-2a71-4a86-94a7-623891d89cb1',
+  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2FServiceRemedial_Massage%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%82%E0%B8%84%E0%B8%A5%E0%B8%AA.mp4?alt=media&token=3190f142-f27f-4f64-a2f6-1203973fb69d',
   'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_57v0bp57v0bp57v0.png?alt=media&token=43ce17fd-7bc0-42d2-a138-564fc51379d9',
   'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_i6lwnyi6lwnyi6lw.png?alt=media&token=838000f3-de11-4f62-9daf-5bdc13173620',
   'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_jjyw4djjyw4djjyw.png?alt=media&token=3874f76b-3136-4f54-b82c-f8544295a619',
@@ -56,54 +67,49 @@ const GALLERY_TITLES = [
 ];
 
 const SYSTEM_INSTRUCTION = `
-[Role & Persona]
-You are the "Princess AI," the digital concierge for The Princess Thai Massage in Riverwood, NSW. Your personality is exceptionally polite, patient, and professional. Your primary goal is to build trust and provide clear, elegant information. You act as a helpful guide for all visitors, providing a "Premium Thai Hospitality" experience, especially for seniors.
+👑 System Instruction: The Princess Thai Massage (Master Brain)
+Role: You are "Princess AI", the expert Digital Receptionist for The Princess Thai Massage. You represent the brand's Minimal Luxury image. You have full knowledge of the website's content and business operations.
 
-[Trust-Building & Testimonials]
-- Our Reputation: We maintain an excellent Average **4.9 Stars** on Google Reviews from local clients in Riverwood.
-- Targeted Feedback: You should reference specific reviews found on our website:
-  • **Sarah**: Highlights the "peaceful atmosphere."
-  • **Emma**: Specifically recommends our Hot Oil Massage for seniors due to its exceptional comfort.
-  • **Mike**: Mentions our "professional staff" and "very clean shop."
-- Visual Aid: Mention that our testimonials are accompanied by blossoming orchids on the website, symbolizing the rejuvenation guests feel.
-- Gallery: Mention that guests can browse our "Sanctuary Gallery" to see our serene and clean environment, decorated with our signature purple orchids.
+1. Service Menu & Pricing (Strict):
+• 30 Mins: **$50**
+• 45 Mins: **$70**
+• 60 Mins: **$80**
+• 90 Mins: **$130** (Signature Deep Therapeutic Healing)
+Treatments: Specialized in Hot Oil and Coconut Oil Massage. Performed by professional female therapists only.
 
-[General Tone]
-- Warm Welcome: Always greet customers with a high-class, welcoming, and warm tone.
-- Senior-Friendly: Speak clearly and patiently, using simple, elegant English. Use bold text for key data.
+2. Contact & Operations:
+• Phone: **0427 139 455** (Always tell customers to call this number for bookings).
+• Hours: **10:00 AM – 08:30 PM** (Open 7 Days).
 
-[Visual Presentation Rules]
-1. Use Clear Spacing: Use bullet points and empty lines between different pieces of information.
-2. Highlight Key Data: Use **bold text** for prices, phone numbers, and opening hours.
+3. Definitive Navigation (Preventing Residential Entry):
+• Address: **186-202 Belmore Rd, Riverwood NSW 2210**.
+• Landmark: Located in the commercial block on the main road, formerly known as Angel's Touch Riverwood.
+• Link for GPS: **https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d827.3841208061432!2d151.05144126959684!3d-33.95304789832466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12b935c4faf1d7%3A0x4c5e825650c1d8d!2s186-202%20Belmore%20Rd%2C%20Riverwood%20NSW%202210!5e0!3m2!1sen!2sau!4v1778845399854!5m2!1sen!2sau**
+• Instruction: "Please stay on the main Belmore Road. Do not enter any residential side streets. Look for our professional storefront signage."
 
-[Core Shop Information]
-- Location: **186 Belmore Rd, Riverwood NSW 2210** (Formerly Angel's Touch).
-- Services: We specialize in Hot Oil Massage and Coconut Oil Massage.
-- Staff: All-female professional therapists.
-- Flat Rate Pricing:
-  • **30 Minutes — $50**
-  • **45 Minutes — $70**
-  • **60 Minutes — $80**
-- Opening Hours: Open 7 Days, **10:00 AM – 08:30 PM**.
-- Booking Policy: We do not accept bookings via chat. All guests must call to check availability.
+4. Communication Rules:
+• Language: You must understand and reply in both English and Thai (ภาษาไทย). If asked in Thai like "ราคาแพ็กเกจ" or "ราคาแพก", answer with the price list clearly.
+• Tone: Elegant, helpful, and welcoming.
+• Call to Action: Every conversation SHOULD end by politely encouraging the customer to call **0427 139 455** to secure their spot.
 
-[Interaction Protocol]
-- Trust Focus: When asked if the shop is good, refer to the 4.9-star rating and feedback from Sarah, Emma, or Mike.
-- Senior Care: Emphasize Emma's review if the customer is a senior or asking for a parent.
-- Image Navigation: Mention that the image slider on the website changes to show the specific treatment when they click on a price package.
-- The "Call Only" Rule: Every response must end with a polite invitation to call the shop directly at **02 9533 8849**.
+[Trust-Building Data]
+- Average Rating: **4.9 Stars** on Google Reviews.
+- Local Testimonials: Sarah (peaceful atmosphere), Emma (recommended for seniors), Mike (clean shop and professional staff).
 `;
 
 // --- Components ---
 
 function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [messages, setMessages] = useState<{ role: 'user' | 'ai'; text: string }[]>([
     { role: 'ai', text: 'Hello! I am Princess AI. How may I assist you with our massage treatments today?' },
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const longPressTimer = useRef<NodeJS.Timeout | null>(null);
+  const isDragging = useRef(false);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -123,19 +129,35 @@ function ChatBot() {
       const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
       
       const response = await ai.models.generateContent({
-        model: 'gemini-3.1-flash-lite',
+        model: 'gemini-1.5-flash-latest',
         contents: userMsg,
         config: { systemInstruction: SYSTEM_INSTRUCTION },
       });
       
-      setMessages((prev) => [...prev, { role: 'ai', text: response.text || 'I apologize, I am experiencing a connection issue. Please call us at 02 9533 8849.' }]);
+      setMessages((prev) => [...prev, { role: 'ai', text: response.text || 'I apologize, I am experiencing a connection issue. Please call us at 0427 139 455.' }]);
     } catch (error) {
       console.error('Chat error:', error);
-      setMessages((prev) => [...prev, { role: 'ai', text: 'I apologize, something went wrong. Please call us at 02 9533 8849 for immediate assistance.' }]);
+      setMessages((prev) => [...prev, { role: 'ai', text: 'I apologize, something went wrong. Please call us at 0427 139 455 for immediate assistance.' }]);
     } finally {
       setIsTyping(false);
     }
   };
+
+  const startLongPress = () => {
+    longPressTimer.current = setTimeout(() => {
+      setIsHidden(true);
+      setIsOpen(false);
+    }, 2000);
+  };
+
+  const endLongPress = () => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+  };
+
+  if (isHidden) return null;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 font-sans">
@@ -150,10 +172,16 @@ function ChatBot() {
             {/* Header */}
             <div className="bg-[#2d1b40] p-6 flex items-center justify-between text-white">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-[#9c77b7] rounded-full flex items-center justify-center text-2xl border-2 border-white/20">👸</div>
+                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/20">
+                  <img 
+                    src="https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_jafsbejafsbejafs.png?alt=media&token=93b44e20-37b3-4890-a8ad-538c64418577" 
+                    className="w-full h-full object-cover"
+                    alt="Princess AI"
+                  />
+                </div>
                 <div>
-                  <h3 className="font-serif text-lg leading-none">Princess AI</h3>
-                  <span className="text-[12px] opacity-70 tracking-widest uppercase">Digital Receptionist</span>
+                  <h3 className="font-serif text-xl leading-none">Princess AI</h3>
+                  <span className="text-[14px] opacity-70 tracking-widest uppercase">Digital Receptionist</span>
                 </div>
               </div>
               <button onClick={() => setIsOpen(false)} className="hover:rotate-90 transition-transform duration-300">
@@ -166,7 +194,7 @@ function ChatBot() {
               {messages.map((m, i) => (
                 <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div
-                    className={`max-w-[85%] px-5 py-3 rounded-2xl text-[17px] leading-relaxed shadow-sm ${
+                    className={`max-w-[85%] px-5 py-3 rounded-2xl text-[19px] leading-relaxed shadow-sm ${
                       m.role === 'user' ? 'bg-[#9c77b7] text-white rounded-br-none' : 'bg-white text-neutral-800 rounded-tl-none border border-neutral-100'
                     }`}
                   >
@@ -194,7 +222,7 @@ function ChatBot() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Type your question here..."
-                  className="w-full pl-6 pr-14 py-4 bg-neutral-50 rounded-2xl text-[16px] border-none focus:ring-2 focus:ring-[#9c77b7] transition-all"
+                  className="w-full pl-6 pr-14 py-4 bg-neutral-50 rounded-2xl text-[18px] border-none focus:ring-2 focus:ring-[#9c77b7] transition-all"
                 />
                 <button
                   onClick={handleSend}
@@ -209,17 +237,37 @@ function ChatBot() {
       </AnimatePresence>
 
       <motion.button
+        drag
+        dragConstraints={{ left: -300, right: 0, top: -600, bottom: 0 }}
+        dragElastic={0.1}
+        onDragStart={() => {
+          isDragging.current = true;
+          endLongPress();
+        }}
+        onDragEnd={() => {
+          setTimeout(() => { isDragging.current = false; }, 100);
+        }}
+        onPointerDown={startLongPress}
+        onPointerUp={endLongPress}
+        onPointerLeave={endLongPress}
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-20 h-20 bg-[#9c77b7] text-white rounded-full shadow-2xl flex flex-col items-center justify-center border-4 border-white overflow-hidden relative group"
+        onClick={() => {
+          if (!isDragging.current) {
+            setIsOpen(!isOpen);
+          }
+        }}
+        className="w-20 h-20 bg-[#9c77b7] text-white rounded-full shadow-2xl flex flex-col items-center justify-center border-4 border-white overflow-hidden relative group cursor-grab active:cursor-grabbing"
       >
-        <span className="text-3xl mb-1 group-hover:scale-110 transition-transform">👸</span>
-        <span className="text-[9px] font-bold uppercase tracking-widest opacity-80">Chat AI</span>
+        <img 
+          src="https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_jafsbejafsbejafs.png?alt=media&token=93b44e20-37b3-4890-a8ad-538c64418577"
+          className="w-full h-full object-cover transition-transform group-hover:scale-110"
+          alt="Chat AI"
+        />
         <motion.div
            animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
            transition={{ duration: 2, repeat: Infinity }}
-           className="absolute inset-0 bg-white rounded-full"
+           className="absolute inset-0 bg-white rounded-full pointer-events-none"
         />
       </motion.button>
     </div>
@@ -231,7 +279,7 @@ export default function App() {
   const [activeGalleryIdx, setActiveGalleryIdx] = useState(0);
 
   return (
-    <div className="min-h-screen bg-[#fffbff] text-[#2d1b40] font-sans selection:bg-[#9c77b7]/20 text-[18px] md:text-[20px] relative">
+    <div className="min-h-screen bg-[#fffbff] text-[#2d1b40] font-sans selection:bg-[#9c77b7]/20 text-[20px] md:text-[22px] relative">
       {/* Fixed Background Atmospheric Orchids */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <motion.img 
@@ -262,22 +310,22 @@ export default function App() {
           <div className="flex items-center gap-3">
             <span className="text-3xl">🌸</span>
             <div className="flex flex-col">
-              <span className="text-sm font-bold tracking-[0.3em] uppercase text-[#9c77b7]">The Princess</span>
-              <span className="text-base font-serif italic tracking-wide">Thai Massage</span>
+              <span className="text-base font-bold tracking-[0.3em] uppercase text-[#9c77b7]">The Princess</span>
+              <span className="text-lg font-serif italic tracking-wide">Thai Massage</span>
             </div>
           </div>
           
-          <div className="hidden md:flex items-center gap-10 text-[13px] font-bold tracking-[0.2em] uppercase">
+          <div className="hidden md:flex items-center gap-10 text-[16px] font-bold tracking-[0.2em] uppercase">
             <a href="#" className="hover:text-[#9c77b7] transition">Home</a>
             <a href="#services" className="hover:text-[#9c77b7] transition">Services</a>
             <a href="#gallery" className="hover:text-[#9c77b7] transition">Gallery</a>
             <a href="#contact" className="hover:text-[#9c77b7] transition">Contact</a>
             <a
-               href="tel:0295338849"
-               className="bg-[#9c77b7] text-white px-8 py-4 rounded-full hover:bg-[#8659a3] transition shadow-lg text-base flex items-center gap-2"
+               href="tel:0427139455"
+               className="bg-[#9c77b7] text-white px-10 py-5 rounded-full hover:bg-[#8659a3] transition shadow-lg text-lg flex items-center gap-2"
             >
-              <Phone size={20} />
-              Call 02 9533 8849
+              <Phone size={24} />
+              Call 0427 139 455
             </a>
           </div>
           <button className="md:hidden p-2 text-[#9c77b7]">
@@ -311,20 +359,20 @@ export default function App() {
               transition={{ duration: 1 }}
               className="max-w-2xl"
             >
-              <h2 className="text-5xl md:text-8xl font-serif leading-[1.1] mb-8 text-[#2d1b40]">
+              <h2 className="text-6xl md:text-9xl font-serif leading-[1.1] mb-8 text-[#2d1b40]">
                 Authentic Thai <br />
                 <span className="text-[#9c77b7] italic">Relaxation</span> <br />
                 <span className="font-light">Riverwood.</span>
               </h2>
-              <p className="text-xl md:text-2xl text-neutral-600 font-light mb-12 tracking-wide font-serif italic">
+              <p className="text-2xl md:text-3xl text-neutral-600 font-light mb-12 tracking-wide font-serif italic">
                 Experience the ultimate comfort with our Hot Oil and Coconut Oil treatments.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
-                <a href="tel:0295338849" className="bg-[#9c77b7] text-white px-10 py-5 rounded-full text-lg font-bold shadow-xl hover:bg-[#8659a3] transition flex items-center justify-center gap-3">
-                  <Phone size={24} />
-                  CALL 02 9533 8849
+                <a href="tel:0427139455" className="bg-[#9c77b7] text-white px-12 py-6 rounded-full text-xl font-bold shadow-xl hover:bg-[#8659a3] transition flex items-center justify-center gap-3">
+                  <Phone size={28} />
+                  CALL 0427 139 455
                 </a>
-                <a href="#services" className="bg-white/80 backdrop-blur-sm text-[#9c77b7] border-2 border-[#9c77b7]/20 px-10 py-5 rounded-full text-lg font-bold shadow-lg hover:bg-white transition flex items-center justify-center">
+                <a href="#services" className="bg-white/80 backdrop-blur-sm text-[#9c77b7] border-2 border-[#9c77b7]/20 px-12 py-6 rounded-full text-xl font-bold shadow-lg hover:bg-white transition flex items-center justify-center">
                   Explore Menu
                 </a>
               </div>
@@ -357,17 +405,34 @@ export default function App() {
               <div className="sticky top-40">
                  <div className="relative">
                     <AnimatePresence mode="wait">
-                      <motion.img 
-                          key={activePlanIdx}
-                          initial={{ opacity: 0, scale: 1.1 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.95 }}
-                          transition={{ duration: 0.8, ease: "circOut" }}
-                          src={SERVICES[activePlanIdx].image} 
-                          alt="Treatment Level" 
+                      {SERVICES[activePlanIdx].video ? (
+                        <motion.video
+                          key={`srv-v-${activePlanIdx}`}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.5 }}
+                          src={SERVICES[activePlanIdx].video}
+                          poster={SERVICES[activePlanIdx].image}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
                           className="rounded-[80px] shadow-[0_40px_100px_-20px_rgba(156,119,183,0.25)] relative z-10 w-full aspect-[4/5] object-cover"
-                          referrerPolicy="no-referrer"
-                      />
+                        />
+                      ) : (
+                        <motion.img 
+                            key={`srv-i-${activePlanIdx}`}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.5 }}
+                            src={SERVICES[activePlanIdx].image} 
+                            alt="Treatment Level" 
+                            className="rounded-[80px] shadow-[0_40px_100px_-20px_rgba(156,119,183,0.25)] relative z-10 w-full aspect-[4/5] object-cover"
+                            referrerPolicy="no-referrer"
+                        />
+                      )}
                     </AnimatePresence>
                     <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-[#f5effa] rounded-full -z-0" />
                  </div>
@@ -391,9 +456,9 @@ export default function App() {
 
               <div className="space-y-16">
                 <div className="space-y-6">
-                    <span className="text-[#9c77b7] text-sm font-bold uppercase tracking-[0.4em]">Premium Treatments</span>
-                    <h3 className="text-4xl md:text-6xl font-serif text-[#2d1b40] leading-tight">Nourish Your Body <br />& <span className="italic text-[#9c77b7]">Mind</span></h3>
-                    <p className="text-neutral-500 max-w-lg text-lg">Experience the art of relaxation through our specialized treatments, performed by professional female therapists dedicated to your wellbeing.</p>
+                    <span className="text-[#9c77b7] text-base font-bold uppercase tracking-[0.4em]">Premium Treatments</span>
+                    <h3 className="text-5xl md:text-7xl font-serif text-[#2d1b40] leading-tight">Nourish Your Body <br />& <span className="italic text-[#9c77b7]">Mind</span></h3>
+                    <p className="text-neutral-500 max-w-lg text-xl">Experience the art of relaxation through our specialized treatments, performed by professional female therapists dedicated to your wellbeing.</p>
                 </div>
 
                 <div className="space-y-8">
@@ -414,11 +479,11 @@ export default function App() {
                             <Clock size={28} />
                          </div>
                          <div>
-                            <h4 className="text-[26px] md:text-[28px] font-serif font-bold text-[#2d1b40] mb-1">
-                                {s.duration} — <span className="text-[#9c77b7] text-[36px] md:text-[42px] ml-2">{s.price}</span>
+                            <h4 className="text-[30px] md:text-[34px] font-serif font-bold text-[#2d1b40] mb-1">
+                                {s.duration} — <span className="text-[#9c77b7] text-[42px] md:text-[48px] ml-2">{s.price}</span>
                             </h4>
-                            <p className="text-[17px] text-[#9c77b7]/70 font-medium mb-1">{s.description}</p>
-                            <p className="text-sm uppercase tracking-[0.2em] text-neutral-400 font-bold">{s.types}</p>
+                            <p className="text-[19px] text-[#9c77b7]/70 font-medium mb-1">{s.description}</p>
+                            <p className="text-base uppercase tracking-[0.2em] text-neutral-400 font-bold">{s.types}</p>
                          </div>
                       </div>
                     </motion.div>
@@ -482,26 +547,42 @@ export default function App() {
 
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16 space-y-6">
-                <span className="text-[#9c77b7] text-sm font-bold uppercase tracking-[0.4em]">The Sanctuary Gallery</span>
-                <h3 className="text-4xl md:text-6xl font-serif text-[#2d1b40]">A Journey of <span className="italic text-[#9c77b7]">Serenity</span></h3>
-                <p className="text-neutral-500 max-w-2xl mx-auto text-lg leading-relaxed">Browse through our sanctuary of peace, designed to provide the highest standards of Thai hospitality and clinical cleanliness.</p>
+                <span className="text-[#9c77b7] text-base font-bold uppercase tracking-[0.4em]">The Sanctuary Gallery</span>
+                <h3 className="text-4xl md:text-7xl font-serif text-[#2d1b40]">A Journey of <span className="italic text-[#9c77b7]">Serenity</span></h3>
+                <p className="text-neutral-500 max-w-2xl mx-auto text-xl leading-relaxed">Browse through our sanctuary of peace, designed to provide the highest standards of Thai hospitality and clinical cleanliness.</p>
             </div>
 
             <div className="relative group">
                 <div className="overflow-hidden rounded-[80px] shadow-[0_50px_100px_-20px_rgba(45,27,64,0.15)] bg-[#f5effa]">
                     <div className="relative h-[400px] md:h-[700px] w-full">
                         <AnimatePresence mode="wait">
-                            <motion.img
-                                key={activeGalleryIdx}
-                                initial={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
-                                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                                exit={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
-                                transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }}
+                            {GALLERY_IMAGES[activeGalleryIdx].toLowerCase().includes('.mp4') ? (
+                              <motion.video
+                                key={`gal-v-${activeGalleryIdx}`}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.5 }}
                                 src={GALLERY_IMAGES[activeGalleryIdx]}
-                                alt="Gallery Sanctuary"
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
                                 className="w-full h-full object-cover"
-                                referrerPolicy="no-referrer"
-                            />
+                              />
+                            ) : (
+                                <motion.img
+                                    key={`gal-i-${activeGalleryIdx}`}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.5 }}
+                                    src={GALLERY_IMAGES[activeGalleryIdx]}
+                                    alt="Gallery Sanctuary"
+                                    className="w-full h-full object-cover"
+                                    referrerPolicy="no-referrer"
+                                />
+                            )}
                         </AnimatePresence>
                         
                         {/* Overlay Content */}
@@ -598,17 +679,17 @@ export default function App() {
                                     <div className="flex text-amber-400">
                                         {[...Array(r.rating)].map((_, j) => <Star key={j} size={16} fill="currentColor" />)}
                                     </div>
-                                    <div className="flex items-center gap-1 text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded-full uppercase">
+                                    <div className="flex items-center gap-1 text-[12px] font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded-full uppercase">
                                         <div className="w-1 h-1 bg-amber-600 rounded-full" />
                                         Verified
                                     </div>
                                 </div>
-                                <p className="text-xl text-neutral-700 mb-8 font-serif leading-relaxed italic group-hover:text-[#2d1b40] transition-colors">"{r.text}"</p>
+                                <p className="text-2xl text-neutral-700 mb-8 font-serif leading-relaxed italic group-hover:text-[#2d1b40] transition-colors">"{r.text}"</p>
                                 <div className="mt-auto flex items-center gap-4">
-                                    <div className="w-10 h-10 rounded-full bg-[#f5effa] flex items-center justify-center text-[#9c77b7] font-bold text-sm">
+                                    <div className="w-10 h-10 rounded-full bg-[#f5effa] flex items-center justify-center text-[#9c77b7] font-bold text-base">
                                         {r.name.charAt(0)}
                                     </div>
-                                    <span className="text-sm uppercase font-bold tracking-[0.2em] text-[#2d1b40]">— {r.name}</span>
+                                    <span className="text-base uppercase font-bold tracking-[0.2em] text-[#2d1b40]">— {r.name}</span>
                                 </div>
                             </motion.div>
                         ))}
@@ -648,18 +729,18 @@ export default function App() {
                 <div className="bg-[#2d1b40] rounded-[80px] overflow-hidden flex flex-col lg:flex-row shadow-2xl border-4 border-white">
                     <div className="lg:w-1/2 p-12 md:p-24 space-y-12">
                         <div className="space-y-4">
-                            <h3 className="text-4xl md:text-6xl font-serif text-white whitespace-nowrap">Ready to <br /><span className="text-[#9c77b7] italic">Book Your</span> Session?</h3>
-                            <p className="text-white/60 text-lg">Please call us directly to check immediate availability. We do not accept bookings via chat.</p>
+                            <h3 className="text-5xl md:text-7xl font-serif text-white whitespace-nowrap">Ready to <br /><span className="text-[#9c77b7] italic">Book Your</span> Session?</h3>
+                            <p className="text-white/60 text-xl">Please call us directly to check immediate availability. We do not accept bookings via chat.</p>
                         </div>
                         
                         <div className="space-y-8">
-                            <a href="tel:0295338849" className="flex items-center gap-8 group">
+                            <a href="tel:0427139455" className="flex items-center gap-8 group">
                                 <div className="w-20 h-20 rounded-full bg-[#9c77b7] flex items-center justify-center text-white group-hover:scale-110 transition shadow-lg">
                                     <Phone size={32} />
                                 </div>
                                 <div>
-                                    <span className="text-3xl md:text-5xl font-bold text-white block mb-1">02 9533 8849</span>
-                                    <span className="text-sm uppercase tracking-widest text-[#9c77b7] font-bold">Call to book anytime</span>
+                                    <span className="text-4xl md:text-6xl font-bold text-white block mb-1">0427 139 455</span>
+                                    <span className="text-base uppercase tracking-widest text-[#9c77b7] font-bold">Call to book anytime</span>
                                 </div>
                             </a>
                             
@@ -677,7 +758,7 @@ export default function App() {
                     
                     <div className="lg:w-1/2 min-h-[400px] relative">
                          <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.7483664053896!2d151.0503628!3d-33.9456426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12be7c5b6a782d%3A0xa6466f8e7a68574!2s186%20Belmore%20Rd%2C%20Riverwood%20NSW%202210%2C%20Australia!5e0!3m2!1sen!2sau!4v1715663672725!5m2!1sen!2sau" 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d827.3841208061432!2d151.05144126959684!3d-33.95304789832466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12b935c4faf1d7%3A0x4c5e825650c1d8d!2s186-202%20Belmore%20Rd%2C%20Riverwood%20NSW%202210!5e0!3m2!1sen!2sau!4v1778845399854!5m2!1sen!2sau" 
                             className="w-full h-full border-none pointer-events-none lg:pointer-events-auto"
                             allowFullScreen
                             loading="lazy"
@@ -685,7 +766,7 @@ export default function App() {
                         />
                         <div className="absolute top-10 left-10 right-10 bg-white/95 backdrop-blur p-8 rounded-3xl shadow-2xl">
                              <h4 className="text-[#9c77b7] font-bold uppercase tracking-[0.2em] mb-2">Our Location</h4>
-                             <p className="text-[#2d1b40] font-medium mb-1">186 Belmore Rd, Riverwood NSW 2210</p>
+                             <p className="text-[#2d1b40] font-medium mb-1">186-202 Belmore Rd, Riverwood NSW 2210</p>
                              <p className="text-sm text-neutral-400 italic">Formerly Angel's Touch</p>
                         </div>
                     </div>
@@ -697,11 +778,11 @@ export default function App() {
       <footer className="py-20 border-t border-neutral-100 bg-white">
         <div className="max-w-7xl mx-auto px-6 text-center space-y-8">
             <div className="flex items-center justify-center gap-3">
-                <span className="text-3xl">🌸</span>
-                <span className="text-xl font-serif italic text-[#2d1b40]">The Princess Thai Massage</span>
+                <span className="text-4xl">🌸</span>
+                <span className="text-2xl font-serif italic text-[#2d1b40]">The Princess Thai Massage</span>
             </div>
-            <p className="text-sm text-neutral-400 uppercase tracking-widest">&copy; 2026 The Princess Thai Massage Riverwood. All rights reserved.</p>
-            <div className="flex justify-center gap-10 text-xs uppercase tracking-[0.3em] text-[#9c77b7] font-bold">
+            <p className="text-base text-neutral-400 uppercase tracking-widest">&copy; 2026 The Princess Thai Massage Riverwood. All rights reserved.</p>
+            <div className="flex justify-center gap-10 text-sm uppercase tracking-[0.3em] text-[#9c77b7] font-bold">
                 <a href="#" className="hover:opacity-70 transition">Privacy Policy</a>
                 <a href="#" className="hover:opacity-70 transition">Terms of Service</a>
             </div>
@@ -716,7 +797,7 @@ export default function App() {
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           whileTap={{ scale: 0.9 }}
-          href="tel:0295338849"
+          href="tel:0427139455"
           className="w-16 h-16 bg-[#9c77b7] text-white rounded-full shadow-2xl flex items-center justify-center border-4 border-white"
         >
           <Phone size={28} />
