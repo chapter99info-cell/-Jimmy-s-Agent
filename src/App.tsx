@@ -267,17 +267,22 @@ function ChatBot() {
   if (isHidden) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-sans">
+    <motion.div 
+      drag
+      dragMomentum={false}
+      className="fixed bottom-6 right-6 z-50 font-sans touch-none"
+      style={{ x: 0, y: 0 }}
+    >
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 50, scale: 0.9 }}
-            className="mb-4 w-80 md:w-96 bg-white rounded-3xl shadow-2xl border border-[#9c77b7]/10 overflow-hidden flex flex-col h-[550px]"
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className="absolute bottom-24 right-0 w-80 md:w-96 bg-white rounded-3xl shadow-2xl border border-[#9c77b7]/10 overflow-hidden flex flex-col h-[550px]"
           >
             {/* Header */}
-            <div className="bg-[#2d1b40] p-6 flex items-center justify-between text-white">
+            <div className="bg-[#2d1b40] p-6 flex items-center justify-between text-white flex-shrink-0">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/20">
                   <img 
@@ -291,13 +296,19 @@ function ChatBot() {
                   <span className="text-[14px] opacity-70 tracking-widest uppercase">Digital Receptionist</span>
                 </div>
               </div>
-              <button onClick={() => setIsOpen(false)} className="hover:rotate-90 transition-transform duration-300">
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsOpen(false);
+                }} 
+                className="hover:rotate-90 transition-transform duration-300"
+              >
                 <X size={24} />
               </button>
             </div>
 
             {/* Messages */}
-            <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6 bg-[#fffcfb]">
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6 bg-[#fffcfb] cursor-default" onPointerDown={e => e.stopPropagation()}>
               {messages.map((m, i) => (
                 <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div
@@ -321,7 +332,7 @@ function ChatBot() {
             </div>
 
             {/* Input */}
-            <div className="p-6 bg-white border-t border-neutral-100">
+            <div className="p-6 bg-white border-t border-neutral-100 flex-shrink-0" onPointerDown={e => e.stopPropagation()}>
               <div className="relative">
                 <input
                   type="text"
@@ -332,7 +343,7 @@ function ChatBot() {
                   className="w-full pl-6 pr-14 py-4 bg-neutral-50 rounded-2xl text-[18px] border-none focus:ring-2 focus:ring-[#9c77b7] transition-all"
                 />
                 <button
-                  onClick={handleSend}
+                  onClick={(e) => { e.stopPropagation(); handleSend(); }}
                   className="absolute right-2 top-2 p-2 text-[#9c77b7] hover:bg-[#9c77b7]/10 rounded-xl transition"
                 >
                   <Send size={24} />
@@ -344,16 +355,6 @@ function ChatBot() {
       </AnimatePresence>
 
       <motion.button
-        drag
-        dragConstraints={{ left: -300, right: 0, top: -600, bottom: 0 }}
-        dragElastic={0.1}
-        onDragStart={() => {
-          isDragging.current = true;
-          endLongPress();
-        }}
-        onDragEnd={() => {
-          setTimeout(() => { isDragging.current = false; }, 100);
-        }}
         onPointerDown={startLongPress}
         onPointerUp={endLongPress}
         onPointerLeave={endLongPress}
@@ -363,6 +364,14 @@ function ChatBot() {
           if (!isDragging.current) {
             setIsOpen(!isOpen);
           }
+        }}
+        onDragStart={() => {
+          isDragging.current = true;
+          endLongPress();
+        }}
+        onDragEnd={() => {
+          // Smaller delay to reset isDragging
+          setTimeout(() => { isDragging.current = false; }, 50);
         }}
         className="w-20 h-20 bg-[#9c77b7] text-white rounded-full shadow-2xl flex flex-col items-center justify-center border-4 border-white overflow-hidden relative group cursor-grab active:cursor-grabbing"
       >
@@ -377,7 +386,7 @@ function ChatBot() {
            className="absolute inset-0 bg-white rounded-full pointer-events-none"
         />
       </motion.button>
-    </div>
+    </motion.div>
   );
 }
 
@@ -954,8 +963,14 @@ export default function App() {
                         />
                         <div className="absolute top-10 left-10 right-10 bg-white/95 backdrop-blur p-8 rounded-3xl shadow-2xl">
                              <h4 className="text-[#9c77b7] font-bold uppercase tracking-[0.2em] mb-2">Our Location</h4>
-                             <p className="text-[#2d1b40] font-medium mb-1">186-202 Belmore Rd, Riverwood NSW 2210</p>
-                             <p className="text-sm text-neutral-400 italic">Formerly Angel's Touch</p>
+                             <a 
+                                href="https://www.google.com/maps/search/?api=1&query=186-202+Belmore+Rd,+Riverwood+NSW+2210"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[#2d1b40] font-medium mb-1 hover:text-[#9c77b7] transition-colors block"
+                             >
+                                186-202 Belmore Rd, Riverwood NSW 2210
+                             </a>
                         </div>
                     </div>
                 </div>
