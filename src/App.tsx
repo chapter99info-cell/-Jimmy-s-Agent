@@ -6,7 +6,6 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { Phone, MapPin, Clock, Users, X, Send, Menu, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
-import { GoogleGenAI } from '@google/genai';
 
 // --- Constants & Data ---
 const SERVICES = [
@@ -15,32 +14,33 @@ const SERVICES = [
     price: '$50', 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Quick & focused relaxation',
-    video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2F%E0%B8%A7%E0%B8%B4%E0%B8%94%E0%B8%B5%E0%B9%82%E0%B8%AD%E0%B8%99%E0%B8%A7%E0%B8%94%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%AD%E0%B9%82%E0%B8%A3%E0%B8%A1%E0%B9%88%E0%B8%B2.mp4?alt=media&token=51770ab3-15c3-4e09-b612-64bb36b67bde',
-    image: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    // 📷 30 นาที: แสดง "ภาพนิ่ง" อย่างเดียว
+    image: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FSlide%2FGemini_Generated_Image_%20(7).png?alt=media&token=f61e2848-7264-45a3-8dde-2f680d4cfa03'
   },
   { 
     duration: '45 MINS', 
     price: '$70', 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Deep and continuous oil treatment',
-    video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2F%E0%B8%A7%E0%B8%B4%E0%B8%94%E0%B8%B5%E0%B9%82%E0%B8%AD%E0%B8%99%E0%B8%A7%E0%B8%94%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%AD%E0%B9%82%E0%B8%A3%E0%B8%A1%E0%B9%88%E0%B8%B2.mp4?alt=media&token=51770ab3-15c3-4e09-b612-64bb36b67bde',
-    image: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    // ⬇️ 🎥 พี่แสนลบข้อความข้างล่างนี้ แล้ววางลิงก์วิดีโอของพี่ลงไปได้เลยครับ
+    video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2FMix02.mp4?alt=media&token=2f8032da-130a-40d8-a3f5-a8750cc8a581',
+  
   },
   { 
     duration: '60 MINS', 
     price: '$80', 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Premium full-body rejuvenation',
-    video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2F%E0%B8%A7%E0%B8%B4%E0%B8%94%E0%B8%B5%E0%B9%82%E0%B8%AD%E0%B8%99%E0%B8%A7%E0%B8%94%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%AD%E0%B9%82%E0%B8%A3%E0%B8%A1%E0%B9%88%E0%B8%B2.mp4?alt=media&token=51770ab3-15c3-4e09-b612-64bb36b67bde',
-    image: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    // 📷 60 นาที: แสดง "ภาพนิ่ง" อย่างเดียว
+    image: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_p38wuxp38wuxp38w.png?alt=media&token=35c13691-6301-4108-9fac-508cd169f854'
   },
   { 
     duration: '90 MINS', 
-    price: '$130', 
+    price: '$130',
     types: 'HOT OIL | COCONUT OIL',
     description: 'Signature Deep Therapeutic Healing',
+    // 🎥 90 นาที: แสดง "วิดีโอ" (และมีรูปหน้าปกรอระหว่างโหลด)
     video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2F%E0%B8%A7%E0%B8%B4%E0%B8%94%E0%B8%B5%E0%B9%82%E0%B8%AD%E0%B8%99%E0%B8%A7%E0%B8%94%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%AD%E0%B9%82%E0%B8%A3%E0%B8%A1%E0%B9%88%E0%B8%B2.mp4?alt=media&token=51770ab3-15c3-4e09-b612-64bb36b67bde',
-    image: 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
   },
 ];
 
@@ -51,11 +51,20 @@ const REVIEWS = [
 ];
 
 const GALLERY_IMAGES = [
-  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2FServiceRemedial_Massage%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%82%E0%B8%84%E0%B8%A5%E0%B8%AA.mp4?alt=media&token=3190f142-f27f-4f64-a2f6-1203973fb69d',
-  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_57v0bp57v0bp57v0.png?alt=media&token=43ce17fd-7bc0-42d2-a138-564fc51379d9',
-  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_i6lwnyi6lwnyi6lw.png?alt=media&token=838000f3-de11-4f62-9daf-5bdc13173620',
+  // 1. Welcome to Our Sanctuary (รูปหินร้อน ดอกไม้ บรรยากาศผ่อนคลาย)
   'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_jjyw4djjyw4djjyw.png?alt=media&token=3874f76b-3136-4f54-b82c-f8544295a619',
-  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_wpf999wpf999wpf9%20(1).png?alt=media&token=8aa4321c-5302-4a53-a504-61b5ffbfa5b9'
+  
+  // 2. The Princess Thai Experience (รูปการนวดน้ำมันระดับพรีเมียม)
+  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_57v0bp57v0bp57v0.png?alt=media&token=43ce17fd-7bc0-42d2-a138-564fc51379d9',
+  
+  // 3. Professional Healing Space (รูปน้ำมันอโรม่าและเทียนหอมในห้องนวด)
+  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_i6lwnyi6lwnyi6lw.png?alt=media&token=d92412b1-22fd-4078-a69c-785727c3a211',
+  
+  // 4. Serene Treatment Rooms (รูปเตียงนวดไทยและการเซตอัปห้องที่สวยงาม)
+  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FSlide%2FGemini_Generated_Image_%20(9).png?alt=media&token=554cd51b-e661-46c0-be35-7cb981a4b020',
+  
+  // 5. Elegant Hallways of Peace (รูปเบาะพักผ่อนและผ้าขนหนูสไตล์โรงแรม 5 ดาว)
+  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FSlide%2FGemini_Generated_Image_%20(8).png?alt=media&token=ceb8472b-745f-4f8f-8cd4-659e11bcd7d4'
 ];
 
 const GALLERY_TITLES = [
@@ -67,34 +76,127 @@ const GALLERY_TITLES = [
 ];
 
 const SYSTEM_INSTRUCTION = `
-👑 System Instruction: The Princess Thai Massage (Master Brain)
-Role: You are "Princess AI", the expert Digital Receptionist for The Princess Thai Massage. You represent the brand's Minimal Luxury image. You have full knowledge of the website's content and business operations.
+👑 System Instruction: The Princess Thai Massage (Bilingual Expert)
+Role: You are "Princess AI", the elegant and welcoming Digital Receptionist for The Princess Thai Massage in Riverwood. You represent a Minimal Luxury brand.
 
-1. Service Menu & Pricing (Strict):
-• 30 Mins: **$50**
-• 45 Mins: **$70**
-• 60 Mins: **$80**
-• 90 Mins: **$130** (Signature Deep Therapeutic Healing)
-Treatments: Specialized in Hot Oil and Coconut Oil Massage. Performed by professional female therapists only.
+1. Language Handling (CRITICAL):
+• You must understand and reply in the language the customer uses. 
+• If the customer asks in Thai (e.g., "ราคาแพกวันนี้", "มีนวดอะไรบ้าง", "ราคาเท่าไหร่"), you MUST reply in polite Thai using "ค่ะ/นะคะ".
 
-2. Contact & Operations:
-• Phone: **0427 139 455** (Always tell customers to call this number for bookings).
-• Hours: **10:00 AM – 08:30 PM** (Open 7 Days).
+2. Service Menu & Pricing (Strict List):
+• 30 Mins: $50 (Quick & focused relaxation)
+• 45 Mins: $70 (Deep and continuous oil treatment)
+• 60 Mins: $80 (Premium full-body rejuvenation)
+• 90 Mins: $130 (Signature Deep Therapeutic Healing)
+*Note: We specialize in Hot Oil and Coconut Oil Massage performed by professional female therapists only.*
 
-3. Definitive Navigation (Preventing Residential Entry):
-• Address: **186-202 Belmore Rd, Riverwood NSW 2210**.
-• Landmark: Located in the commercial block on the main road, formerly known as Angel's Touch Riverwood.
-• Link for GPS: **https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d827.3841208061432!2d151.05144126959684!3d-33.95304789832466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12b935c4faf1d7%3A0x4c5e825650c1d8d!2s186-202%20Belmore%20Rd%2C%20Riverwood%20NSW%202210!5e0!3m2!1sen!2sau!4v1778845399854!5m2!1sen!2sau**
-• Instruction: "Please stay on the main Belmore Road. Do not enter any residential side streets. Look for our professional storefront signage."
+[Example Thai Response for Prices]:
+"สวัสดีค่ะ ยินดีต้อนรับสู่ คอร์สนวดพรีเมียมของ The Princess Thai Massage ค่ะ ราคาแพ็กเกจของเรามีดังนี้นะคะ:
+• 30 นาที — $50
+• 45 นาที — $70
+• 60 นาที — $80
+• 90 นาที — $130 (คอร์สแนะนำเพื่อการผ่อนคลายขั้นสุด)
+สนใจจองคิวโทรหาเราได้ที่เบอร์ 0427 139 455 ได้เลยค่ะ ✨"
 
-4. Communication Rules:
-• Language: You must understand and reply in both English and Thai (ภาษาไทย). If asked in Thai like "ราคาแพ็กเกจ" or "ราคาแพก", answer with the price list clearly.
-• Tone: Elegant, helpful, and welcoming.
-• Call to Action: Every conversation SHOULD end by politely encouraging the customer to call **0427 139 455** to secure their spot.
+3. Contact & Operations:
+• Phone: 0427 139 455 (Always direct customers to call this number for bookings. We do not take bookings via chat).
+• Hours: 10:00 AM – 08:30 PM (Open 7 Days).
 
-[Trust-Building Data]
-- Average Rating: **4.9 Stars** on Google Reviews.
-- Local Testimonials: Sarah (peaceful atmosphere), Emma (recommended for seniors), Mike (clean shop and professional staff).
+4. Location & Navigation (Anti-Residential Guide):
+• Address: 186-202 Belmore Rd, Riverwood NSW 2210.
+• Note: Located on the main road commercial block (Formerly known as Angel's Touch location, but now fully renovated under new ownership and management).
+• Guideline: Tell customers to stay on Belmore Road, look for our store sign, and DO NOT enter residential side streets.
+
+5. Tone & Call to Action:
+• Keep it luxury, warm, and polite. Always end the chat by inviting them to call 0427 139 455 to secure their spot.
+`;
+
+const PRIVACY_POLICY = `
+The Princess Thai Massage
+Last Updated: May 2026
+
+At The Princess Thai Massage, we are committed to protecting your privacy. This Privacy Policy outlines how we collect, use, disclose, and safeguard your personal information in accordance with the Australian Privacy Principles (APPs) contained in the Privacy Act 1988 (Cth).
+
+1. Information We Collect
+To provide you with high-quality massage therapy and care, we may collect personal and health-related information, including:
+- Contact Information: Your name, phone number, email address, and residential address.
+- Health & Medical History: Current physical conditions, past injuries, allergies, pregnancy status, or medical treatments relevant to safe massage therapy.
+- Transaction Details: Booking history, preferences, and payment information (processed via secure, compliant payment gateways).
+
+2. How We Collect Your Information
+We collect your information directly from you through various channels, including:
+- Online booking forms on our official website.
+- Physical or digital intake/consultation forms completed prior to your session.
+- Phone calls, text messages, emails, or direct conversations at our clinic.
+
+3. How We Use Your Information
+Your information is used strictly to ensure a safe and tailored service, specifically for:
+- Assessing and designing safe massage treatment plans tailored to your health needs.
+- Managing your appointments, sending reminders, and processing payments.
+- Communicating important operational changes or responding to your inquiries.
+- With your explicit consent, sending promotional offers, loyalty rewards, or newsletters. You may opt out of marketing at any time.
+
+4. Disclosure of Your Information
+We respect your confidentiality. We will never sell, lease, or rent your personal data. Your information is only disclosed to third parties under the following limited conditions:
+- To trusted software providers supporting our operations (e.g., booking and billing systems) under strict confidentiality agreements.
+- When required or authorized by Australian law (e.g., to comply with a court order or public health directive).
+
+5. Data Security and Retention
+We implement a variety of administrative and technical security measures to maintain the safety of your personal information. Digital data is stored securely using password-protected systems, and physical forms are stored securely with restricted access. We retain health records for the duration required by Australian healthcare and business compliance regulations.
+
+6. Accessing and Correcting Your Information
+You have the right to request access to the personal data we hold about you and to ask for updates or corrections if any details are inaccurate. To make a request, please contact our privacy manager using the details below.
+
+7. Cookies and Website Tracking
+Our website utilizes cookies to improve user experience, monitor traffic patterns, and optimize booking functionality. You can choose to disable cookies via your browser settings, though it may impact certain features of the website.
+
+8. Contact Us
+If you have any questions, concerns, or complaints regarding this Privacy Policy or how we handle your data, please reach out to us at:
+
+The Princess Thai Massage
+Address: 186 Belmore Rd, Riverwood NSW 2210
+Phone: (02) 8502 8564
+`;
+
+const TERMS_OF_SERVICE = `
+The Princess Thai Massage
+Last Updated: May 2026
+
+Welcome to The Princess Thai Massage. This website and its booking services are owned and operated by The Princess Thai Massage. By accessing our website, making an online booking, or purchasing our services, you agree to comply with and be bound by the following Terms of Service.
+
+1. General Conditions
+We reserve the right to refuse service to anyone for any reason at any time. All credit card and payment processing data is strictly encrypted and handled through secure third-party payment gateways.
+
+2. Online Bookings and Appointments
+To ensure a seamless booking experience through our web application, please note the following:
+- Accuracy: You must provide accurate, current, and complete personal and contact details when making a booking.
+- Confirmation: A booking request is only fully confirmed once you receive a confirmation notification via email, SMS, or through the application interface.
+
+3. Cancellation and Rescheduling Policy
+We value the time of both our clients and our therapists. To manage appointments fairly, we enforce the following policy:
+- Any cancellation or rescheduling must be requested at least 24 hours prior to the scheduled appointment time.
+- Late cancellations (less than 24 hours notice) or failure to show up for your scheduled session ("No-Show") may incur a cancellation fee up to the full value of the booked service, or forfeiture of any deposit paid.
+
+4. Client Health and Responsibilities
+Your health and safety are our top priorities. By booking a treatment with us, you agree to:
+- Disclose all relevant health conditions, allergies, injuries, medical history, or pregnancy status prior to your massage session.
+- Understand that massage therapy is for relaxation and muscular therapeutic purposes and is not a substitute for professional medical treatment or diagnosis.
+- Immediately notify your therapist if you experience pain, discomfort, or dizziness during your session.
+
+5. Conduct and Right to Terminate
+The Princess Thai Massage maintains a strictly professional, safe, and respectful environment. Any form of illicit, inappropriate, or sexual remarks, behavior, or advances will result in the immediate termination of the session without a refund. The client will be banned from future bookings, and local law enforcement will be notified immediately.
+
+6. Pricing and Payments
+All prices listed on our website and booking application are displayed in Australian Dollars (AUD) and are subject to change without notice. Payments must be completed at the time of online booking (if required) or immediately following the service at the clinic.
+
+7. Limitation of Liability
+To the maximum extent permitted by New South Wales (NSW) and Australian Consumer Law, The Princess Thai Massage shall not be liable for any injuries or damages resulting from non-disclosure of medical conditions or misuse of our services.
+
+8. Governing Law
+These Terms of Service and any services provided shall be governed by and construed in accordance with the laws of New South Wales, Australia.
+
+9. Contact Information
+If you have any questions about these Terms of Service, please contact us at 186 Belmore Rd, Riverwood NSW 2210.
 `;
 
 // --- Components ---
@@ -126,15 +228,20 @@ function ChatBot() {
     setIsTyping(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
-      
-      const response = await ai.models.generateContent({
-        model: 'gemini-1.5-flash-latest',
-        contents: userMsg,
-        config: { systemInstruction: SYSTEM_INSTRUCTION },
+      const resp = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          message: userMsg,
+          systemInstruction: SYSTEM_INSTRUCTION
+        }),
       });
       
-      setMessages((prev) => [...prev, { role: 'ai', text: response.text || 'I apologize, I am experiencing a connection issue. Please call us at 0427 139 455.' }]);
+      const data = await resp.json();
+      
+      if (data.error) throw new Error(data.error);
+
+      setMessages((prev) => [...prev, { role: 'ai', text: data.text || 'I apologize, I am experiencing a connection issue. Please call us at 0427 139 455.' }]);
     } catch (error) {
       console.error('Chat error:', error);
       setMessages((prev) => [...prev, { role: 'ai', text: 'I apologize, something went wrong. Please call us at 0427 139 455 for immediate assistance.' }]);
@@ -277,9 +384,90 @@ function ChatBot() {
 export default function App() {
   const [activePlanIdx, setActivePlanIdx] = useState(0);
   const [activeGalleryIdx, setActiveGalleryIdx] = useState(0);
+  const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#fffbff] text-[#2d1b40] font-sans selection:bg-[#9c77b7]/20 text-[20px] md:text-[22px] relative">
+      {/* Privacy Policy Modal */}
+      <AnimatePresence>
+        {showPrivacy && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-[#2d1b40]/60 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="bg-white w-full max-w-2xl max-h-[80vh] rounded-[40px] shadow-2xl flex flex-col overflow-hidden"
+            >
+              <div className="p-8 border-b border-neutral-100 flex items-center justify-between bg-[#f5effa]">
+                <div>
+                  <h3 className="text-2xl font-serif text-[#2d1b40]">Privacy Policy</h3>
+                  <p className="text-sm text-[#9c77b7] font-bold uppercase tracking-widest mt-1">Legal & Data Protection</p>
+                </div>
+                <button 
+                  onClick={() => setShowPrivacy(false)}
+                  className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#2d1b40] hover:bg-[#9c77b7] hover:text-white transition shadow-sm"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto p-8 md:p-12 space-y-6 text-[17px] leading-relaxed text-neutral-600">
+                {PRIVACY_POLICY.split('\n').map((line, i) => (
+                  <p key={i}>{line}</p>
+                ))}
+              </div>
+              <div className="p-8 bg-neutral-50 border-t border-neutral-100 flex justify-end">
+                <button 
+                  onClick={() => setShowPrivacy(false)}
+                  className="px-8 py-3 bg-[#9c77b7] text-white rounded-full font-bold hover:bg-[#8659a3] transition shadow-md"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Terms of Service Modal */}
+      <AnimatePresence>
+        {showTerms && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-[#2d1b40]/60 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="bg-white w-full max-w-2xl max-h-[80vh] rounded-[40px] shadow-2xl flex flex-col overflow-hidden"
+            >
+              <div className="p-8 border-b border-neutral-100 flex items-center justify-between bg-[#f5effa]">
+                <div>
+                  <h3 className="text-2xl font-serif text-[#2d1b40]">Terms of Service</h3>
+                  <p className="text-sm text-[#9c77b7] font-bold uppercase tracking-widest mt-1">Usage & Conduct</p>
+                </div>
+                <button 
+                  onClick={() => setShowTerms(false)}
+                  className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#2d1b40] hover:bg-[#9c77b7] hover:text-white transition shadow-sm"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto p-8 md:p-12 space-y-6 text-[17px] leading-relaxed text-neutral-600">
+                {TERMS_OF_SERVICE.split('\n').map((line, i) => (
+                  <p key={i}>{line}</p>
+                ))}
+              </div>
+              <div className="p-8 bg-neutral-50 border-t border-neutral-100 flex justify-end">
+                <button 
+                  onClick={() => setShowTerms(false)}
+                  className="px-8 py-3 bg-[#9c77b7] text-white rounded-full font-bold hover:bg-[#8659a3] transition shadow-md"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
       {/* Fixed Background Atmospheric Orchids */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <motion.img 
@@ -783,8 +971,8 @@ export default function App() {
             </div>
             <p className="text-base text-neutral-400 uppercase tracking-widest">&copy; 2026 The Princess Thai Massage Riverwood. All rights reserved.</p>
             <div className="flex justify-center gap-10 text-sm uppercase tracking-[0.3em] text-[#9c77b7] font-bold">
-                <a href="#" className="hover:opacity-70 transition">Privacy Policy</a>
-                <a href="#" className="hover:opacity-70 transition">Terms of Service</a>
+                <button onClick={() => setShowPrivacy(true)} className="hover:opacity-70 transition cursor-pointer">Privacy Policy</button>
+                <button onClick={() => setShowTerms(true)} className="hover:opacity-70 transition cursor-pointer">Terms of Service</button>
             </div>
         </div>
       </footer>
