@@ -109,6 +109,23 @@ Role: You are "Princess AI", the elegant and welcoming Digital Receptionist for 
 
 5. Tone & Call to Action:
 • Keep it luxury, warm, and polite. Always end the chat by inviting them to call 0427 139 455 to secure their spot.
+
+6. Reviews & Testimonials (CRITICAL):
+• If a customer expresses satisfaction, praise (e.g., "ประทับใจมาก", "นวดดีมาก", "Good job", "Impressed"), or asks how to leave a review/rating, you MUST reply with this exact format:
+
+**ขอบคุณมากๆ สำหรับความไว้วางใจค่ะ หากประทับใจในบริการ สามารถช่วยรีวิวเป็นกำลังใจให้พวกเราได้นะคะ:**
+
+---
+
+[👉 เขียนรีวิวบน Google Maps ⭐⭐⭐⭐⭐](https://share.google/qEmNBor0UTtoiz8LL)
+
+---
+
+[👉 เข้าชมและรีวิวบน Facebook Page 📘](https://www.facebook.com/profile.php?id=61590124252569)
+
+---
+
+• IMPORTANT: NEVER send raw URLs (https://...). Always use the Markdown link format above.
 `;
 
 const PRIVACY_POLICY = `
@@ -264,9 +281,40 @@ function ChatBot() {
     }
   };
 
-  if (isHidden) return null;
+  // 🛠️ ฟังก์ชันสำหรับจัดการแสดงผลข้อความ (รองรับลิงก์ Markdown)
+  const parseMessageContent = (content: string) => {
+    const regex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = regex.exec(content)) !== null) {
+      if (match.index > lastIndex) {
+        parts.push(content.substring(lastIndex, match.index));
+      }
+      parts.push(
+        <a 
+          key={match.index} 
+          href={match[2]} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-white underline font-bold decoration-white/30 hover:decoration-white transition-all block my-2 p-3 bg-white/10 rounded-xl border border-white/20 text-center"
+        >
+          {match[1].replace(/⭐/g, '✨')}
+        </a>
+      );
+      lastIndex = regex.lastIndex;
+    }
+
+    if (lastIndex < content.length) {
+      parts.push(content.substring(lastIndex));
+    }
+
+    return parts.length > 0 ? parts : content;
+  };
 
   return (
+
     <motion.div 
       drag
       dragMomentum={false}
@@ -316,7 +364,8 @@ function ChatBot() {
                       m.role === 'user' ? 'bg-[#9c77b7] text-white rounded-br-none' : 'bg-white text-neutral-800 rounded-tl-none border border-neutral-100'
                     }`}
                   >
-                    {m.text}
+                    {/* 🔄 จุดเปลี่ยนชีวิตของพี่แสน: เรียกใช้ฟังก์ชันแปลงร่างข้อความแทนตัวหนังสือดิบ */}
+                    {parseMessageContent(m.text)}
                   </div>
                 </div>
               ))}
@@ -370,7 +419,6 @@ function ChatBot() {
           endLongPress();
         }}
         onDragEnd={() => {
-          // Smaller delay to reset isDragging
           setTimeout(() => { isDragging.current = false; }, 50);
         }}
         className="w-20 h-20 bg-[#9c77b7] text-white rounded-full shadow-2xl flex flex-col items-center justify-center border-4 border-white overflow-hidden relative group cursor-grab active:cursor-grabbing"
@@ -935,9 +983,9 @@ export default function App() {
                                 <div className="w-20 h-20 rounded-full bg-[#9c77b7] flex items-center justify-center text-white group-hover:scale-110 transition shadow-lg">
                                     <Phone size={32} />
                                 </div>
-                                <div>
-                                    <span className="text-4xl md:text-6xl font-bold text-white block mb-1">0427 139 455</span>
-                                    <span className="text-base uppercase tracking-widest text-[#9c77b7] font-bold">Call to book anytime</span>
+                                <div className="flex flex-col">
+                                    <span className="text-4xl md:text-6xl font-bold text-white block mb-1 leading-none">0427 139 455</span>
+                                    <span className="text-base uppercase tracking-widest text-[#9c77b7] font-bold mt-2">Call to book anytime</span>
                                 </div>
                             </a>
                             
