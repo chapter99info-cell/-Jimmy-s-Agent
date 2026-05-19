@@ -4,7 +4,7 @@
  */
 
 import { motion, AnimatePresence } from 'motion/react';
-import { Phone, MapPin, Clock, Users, X, Send, Menu, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Phone, MapPin, Clock, Users, X, Send, Menu, Star, ChevronLeft, ChevronRight, Facebook } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 
 // --- Constants & Data ---
@@ -281,40 +281,47 @@ function ChatBot() {
     }
   };
 
-  // 🛠️ ฟังก์ชันสำหรับจัดการแสดงผลข้อความ (รองรับลิงก์ Markdown)
-  const parseMessageContent = (content: string) => {
-    const regex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
-    const parts = [];
-    let lastIndex = 0;
-    let match;
+  // 🛠️ ฟังก์ชันพิเศษของพี่แสน: แปลงร่างข้อความ Markdown ให้กลายเป็นปุ่มกดดีไซน์ทันสมัยพรีเมียม
+  const parseMessageContent = (text: string) => {
+    const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+    const lines = text.split('\n');
 
-    while ((match = regex.exec(content)) !== null) {
-      if (match.index > lastIndex) {
-        parts.push(content.substring(lastIndex, match.index));
+    return lines.map((line, index) => {
+      // 1. ตรวจสอบว่าเป็นลิงก์ปุ่มรีวิวไหม
+      const match = [...line.matchAll(linkRegex)];
+      if (match.length > 0) {
+        const [_, buttonText, url] = match[0];
+        return (
+          <a
+            key={index}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-center bg-white text-[#2d1b40] border-2 border-[#9c77b7] px-5 py-3.5 my-3 rounded-2xl font-bold text-[18px] shadow-sm hover:bg-[#2d1b40] hover:text-white transition-all transform hover:-translate-y-0.5 active:translate-y-0 duration-200"
+          >
+            {buttonText}
+          </a>
+        );
       }
-      parts.push(
-        <a 
-          key={match.index} 
-          href={match[2]} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-white underline font-bold decoration-white/30 hover:decoration-white transition-all block my-2 p-3 bg-white/10 rounded-xl border border-white/20 text-center"
-        >
-          {match[1].replace(/⭐/g, '✨')}
-        </a>
-      );
-      lastIndex = regex.lastIndex;
-    }
 
-    if (lastIndex < content.length) {
-      parts.push(content.substring(lastIndex));
-    }
+      // 2. แปลงตัวหนา **ข้อความ**
+      if (line.startsWith('**') && line.endsWith('**')) {
+        return <p key={index} className="font-bold text-[#2d1b40] mb-2">{line.replace(/\*\*/g, '')}</p>;
+      }
 
-    return parts.length > 0 ? parts : content;
+      // 3. แปลงเส้นคั่น ---
+      if (line.trim() === '---') {
+        return <hr key={index} className="my-3 border-neutral-100" />;
+      }
+
+      // 4. บรรทัดข้อความปกติ
+      return line.trim() ? <p key={index} className="mb-1.5">{line}</p> : <div key={index} className="h-2" />;
+    });
   };
 
-  return (
+  if (isHidden) return null;
 
+  return (
     <motion.div 
       drag
       dragMomentum={false}
@@ -939,14 +946,21 @@ export default function App() {
                             </motion.div>
                         ))}
                         {/* Summary Card */}
-                        <div className="bg-[#2d1b40] p-10 rounded-[50px] text-white flex flex-col justify-center items-center text-center space-y-6">
+                        <motion.a 
+                            href="https://share.google/MVWmjKvUqvx5tBFRY"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.05, shadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)" }}
+                            whileTap={{ scale: 0.98 }}
+                            className="bg-[#2d1b40] p-10 rounded-[50px] text-white flex flex-col justify-center items-center text-center space-y-6 shadow-xl transition-shadow cursor-pointer block"
+                        >
                             <div className="w-16 h-16 bg-[#9c77b7] rounded-full flex items-center justify-center text-2xl">⭐</div>
                             <div>
                                 <h4 className="text-3xl font-serif mb-2">4.9 / 5.0</h4>
                                 <p className="text-white/60 text-sm uppercase tracking-widest font-bold">Google Rating</p>
                             </div>
                             <p className="text-sm text-white/40 italic">Based on latest community feedback from Riverwood locals.</p>
-                        </div>
+                        </motion.a>
                     </div>
                     
                     <div className="lg:w-1/3 w-full h-[400px] lg:h-[600px] rounded-[60px] overflow-hidden shadow-2xl relative">
@@ -1027,11 +1041,36 @@ export default function App() {
       </main>
 
       <footer className="py-20 border-t border-neutral-100 bg-white">
-        <div className="max-w-7xl mx-auto px-6 text-center space-y-8">
+        <div className="max-w-7xl mx-auto px-6 text-center space-y-10">
             <div className="flex items-center justify-center gap-3">
                 <span className="text-4xl">🌸</span>
                 <span className="text-2xl font-serif italic text-[#2d1b40]">The Princess Thai Massage</span>
             </div>
+
+            {/* Social Media Links */}
+            <div className="flex justify-center gap-6">
+                <motion.a
+                    whileHover={{ scale: 1.2, rotate: 5 }}
+                    whileTap={{ scale: 0.9 }}
+                    href="https://www.facebook.com/profile.php?id=61590124252569"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full border border-neutral-100 flex items-center justify-center text-[#9c77b7] hover:bg-[#9c77b7] hover:text-white transition shadow-sm"
+                >
+                    <Facebook size={24} />
+                </motion.a>
+                <motion.a
+                    whileHover={{ scale: 1.2, rotate: -5 }}
+                    whileTap={{ scale: 0.9 }}
+                    href="https://share.google/MVWmjKvUqvx5tBFRY"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full border border-neutral-100 flex items-center justify-center text-[#9c77b7] hover:bg-[#9c77b7] hover:text-white transition shadow-sm"
+                >
+                    <Star size={24} />
+                </motion.a>
+            </div>
+
             <p className="text-base text-neutral-400 uppercase tracking-widest">&copy; 2026 The Princess Thai Massage Riverwood. All rights reserved.</p>
             <div className="flex justify-center gap-10 text-sm uppercase tracking-[0.3em] text-[#9c77b7] font-bold">
                 <button onClick={() => setShowPrivacy(true)} className="hover:opacity-70 transition cursor-pointer">Privacy Policy</button>

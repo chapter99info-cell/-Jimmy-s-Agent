@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+#เปิดทางให้ AI ค้นหาโดยเฉพาะ
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+
+Sitemap: https://www.princessthaimassage.com.au/sitemap.xml
