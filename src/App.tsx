@@ -8,12 +8,12 @@ import { Phone, MapPin, Clock, Users, X, Send, Menu, Star, ChevronLeft, ChevronR
 import { useState, useRef, useEffect } from 'react';
 
 // --- Constants & Data ---
-const SERVICES = [
+const RELAXING_SERVICES = [
   { 
     duration: '30 MINS', 
     price: '$50', 
     types: 'HOT OIL | COCONUT OIL',
-    description: 'Quick & focused relaxation',
+    description: 'Quick & focused aromatherapy relaxation',
     // 📷 30 นาที: แสดง "ภาพนิ่ง" อย่างเดียว
     image: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FSlide%2FGemini_Generated_Image_%20(7).png?alt=media&token=f61e2848-7264-45a3-8dde-2f680d4cfa03'
   },
@@ -22,9 +22,7 @@ const SERVICES = [
     price: '$70', 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Deep and continuous oil treatment',
-    // ⬇️ 🎥 พี่แสนลบข้อความข้างล่างนี้ แล้ววางลิงก์วิดีโอของพี่ลงไปได้เลยครับ
     video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2FMix02.mp4?alt=media&token=2f8032da-130a-40d8-a3f5-a8750cc8a581',
-  
   },
   { 
     duration: '60 MINS', 
@@ -38,11 +36,42 @@ const SERVICES = [
     duration: '90 MINS', 
     price: '$130',
     types: 'HOT OIL | COCONUT OIL',
-    description: 'Signature Deep Therapeutic Healing',
-    // 🎥 90 นาที: แสดง "วิดีโอ" (และมีรูปหน้าปกรอระหว่างโหลด)
+    description: 'The ultimate 1.5 hour serene experience',
     video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2F%E0%B8%A7%E0%B8%B4%E0%B8%94%E0%B8%B5%E0%B9%82%E0%B8%AD%E0%B8%99%E0%B8%A7%E0%B8%94%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%AD%E0%B9%82%E0%B8%A3%E0%B8%A1%E0%B9%88%E0%B8%B2.mp4?alt=media&token=51770ab3-15c3-4e09-b612-64bb36b67bde',
   },
 ];
+
+const DEEP_TISSUE_SERVICES = [
+  { 
+    duration: '30 MINS', 
+    price: '$60', 
+    types: 'HOT OIL | COCONUT OIL',
+    description: 'Targeted muscle recovery',
+    image: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FSlide%2FGemini_Generated_Image_%20(7).png?alt=media&token=f61e2848-7264-45a3-8dde-2f680d4cfa03'
+  },
+  { 
+    duration: '45 MINS', 
+    price: '$80', 
+    types: 'HOT OIL | COCONUT OIL',
+    description: 'Intense therapeutic oil session',
+    video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2FMix02.mp4?alt=media&token=2f8032da-130a-40d8-a3f5-a8750cc8a581',
+  },
+  { 
+    duration: '60 MINS', 
+    price: '$90', 
+    types: 'HOT OIL | COCONUT OIL',
+    description: 'Complete myofascial release',
+    image: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_p38wuxp38wuxp38w.png?alt=media&token=35c13691-6301-4108-9fac-508cd169f854'
+  },
+  { 
+    duration: '90 MINS', 
+    price: '$140',
+    types: 'HOT OIL | COCONUT OIL',
+    description: 'Comprehensive recovery & restoration',
+    video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2F%E0%B8%A7%E0%B8%B4%E0%B8%94%E0%B8%B5%E0%B9%82%E0%B8%AD%E0%B8%99%E0%B8%A7%E0%B8%94%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%AD%E0%B9%82%E0%B8%A3%E0%B8%A1%E0%B9%88%E0%B8%B2.mp4?alt=media&token=51770ab3-15c3-4e09-b612-64bb36b67bde',
+  },
+];
+
 
 const REVIEWS = [
   { name: 'Sarah', text: "A truly wonderful experience. The atmosphere is so peaceful.", rating: 5 },
@@ -84,26 +113,38 @@ Role: You are "Princess AI", the elegant and welcoming Digital Receptionist for 
 • If the customer asks in Thai (e.g., "ราคาแพกวันนี้", "มีนวดอะไรบ้าง", "ราคาเท่าไหร่"), you MUST reply in polite Thai using "ค่ะ/นะคะ".
 
 2. Service Menu & Pricing (Strict List):
-• 30 Mins: $50 (Quick & focused relaxation)
-• 45 Mins: $70 (Deep and continuous oil treatment)
-• 60 Mins: $80 (Premium full-body rejuvenation)
-• 90 Mins: $130 (Signature Deep Therapeutic Healing)
-*Note: We specialize in Hot Oil and Coconut Oil Massage performed by professional female therapists only.*
+• Relaxing Massage (Hot Oil & Coconut Oil):
+  - 30 Mins: $50
+  - 45 Mins: $70
+  - 60 Mins: $80
+  - 90 Mins: $130
+• Deep Tissue Massage (Therapeutic & Muscle Recovery):
+  - 30 Mins: $60
+  - 45 Mins: $80
+  - 60 Mins: $90
+  - 90 Mins: $140
+*Note: We specialize in Hot Oil, Coconut Oil, and Therapeutic Relief treatments performed by professional female therapists only.*
 
 [Example Thai Response for Prices]:
 "สวัสดีค่ะ ยินดีต้อนรับสู่ คอร์สนวดพรีเมียมของ The Princess Thai Massage ค่ะ ราคาแพ็กเกจของเรามีดังนี้นะคะ:
+🌸 1. Relaxing Massage (นวดผ่อนคลายน้ำมันร้อน/น้ำมันมะพร้าว):
 • 30 นาที — $50
 • 45 นาที — $70
 • 60 นาที — $80
-• 90 นาที — $130 (คอร์สแนะนำเพื่อการผ่อนคลายขั้นสุด)
-สนใจจองคิวโทรหาเราได้ที่เบอร์ 0427 139 455 ได้เลยค่ะ ✨"
+• 90 นาที — $130
+💪 2. Deep Tissue Massage (นวดเนื้อเยื่อส่วนลึกเน้นน้ำหนัก บรรเทาอาการตึงปวดเสียวตัว):
+• 30 นาที — $60
+• 45 นาที — $80
+• 60 นาที — $90
+• 90 นาที — $140
+สนใจจองคิวล็อกเวลาโทรหาพวกเราได้เลยที่เบอร์ 0427 139 455 ค่ะ ✨"
 
 3. Contact & Operations:
 • Phone: 0427 139 455 (Always direct customers to call this number for bookings. We do not take bookings via chat).
 • Hours: 10:00 AM – 08:30 PM (Open 7 Days).
 
 4. Location & Navigation (Anti-Residential Guide):
-• Address: 186-202 Belmore Rd, Riverwood NSW 2210.
+• Address: 186 Belmore Rd, Riverwood NSW 2210.
 • Note: Located on the main road commercial block (Formerly known as Angel's Touch location, but now fully renovated under new ownership and management).
 • Guideline: Tell customers to stay on Belmore Road, look for our store sign, and DO NOT enter residential side streets.
 
@@ -117,7 +158,7 @@ Role: You are "Princess AI", the elegant and welcoming Digital Receptionist for 
 
 ---
 
-[👉 เขียนรีวิวบน Google Maps ⭐⭐⭐⭐⭐](https://share.google/qEmNBor0UTtoiz8LL)
+[👉 เขียนรีวิวบน Google Maps ⭐⭐⭐⭐⭐](https://share.google/MVWmjKvUqvx5tBFRY)
 
 ---
 
@@ -172,7 +213,7 @@ If you have any questions, concerns, or complaints regarding this Privacy Policy
 
 The Princess Thai Massage
 Address: 186 Belmore Rd, Riverwood NSW 2210
-Phone: (02) 8502 8564
+Phone: 0427 139 455
 `;
 
 const TERMS_OF_SERVICE = `
@@ -446,10 +487,15 @@ function ChatBot() {
 }
 
 export default function App() {
+  const [activeCategory, setActiveCategory] = useState<'relaxing' | 'deep'>('relaxing');
   const [activePlanIdx, setActivePlanIdx] = useState(0);
   const [activeGalleryIdx, setActiveGalleryIdx] = useState(0);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
+  const [showPrintMenu, setShowPrintMenu] = useState(false);
+
+  const selectedServices = activeCategory === 'relaxing' ? RELAXING_SERVICES : DEEP_TISSUE_SERVICES;
+
 
   return (
     <div className="min-h-screen bg-[#fffbff] text-[#2d1b40] font-sans selection:bg-[#9c77b7]/20 text-[20px] md:text-[22px] relative">
@@ -532,6 +578,185 @@ export default function App() {
           </div>
         )}
       </AnimatePresence>
+
+      {/* Printable Menu Board Modal */}
+      <AnimatePresence>
+        {showPrintMenu && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#2d1b40]/80 backdrop-blur-md overflow-y-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="bg-white w-full max-w-3xl rounded-[40px] shadow-2xl flex flex-col overflow-hidden my-8"
+            >
+              {/* Modal header with no-print utility */}
+              <div className="no-print p-6 md:p-8 bg-gradient-to-r from-[#2d1b40] to-[#452763] text-white flex items-center justify-between flex-shrink-0">
+                <div>
+                  <h3 className="text-2xl md:text-3xl font-serif">Storefront Print Menu</h3>
+                  <p className="text-xs md:text-sm text-[#9c77b7] font-bold uppercase tracking-widest mt-1">Ready for Print (A4 or Poster Layout)</p>
+                </div>
+                <button 
+                  onClick={() => setShowPrintMenu(false)}
+                  className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-[#2d1b40] transition"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              {/* Printable Area */}
+              <div id="printable-menu-board" className="flex-1 overflow-y-auto bg-[#faf8f5] p-6 md:p-12 relative print-container-host">
+                {/* Print Stylesheet */}
+                <style dangerouslySetInnerHTML={{__html: `
+                  @media print {
+                    body {
+                      background: white !important;
+                      color: black !important;
+                    }
+                    /* Hide everything except the printable container */
+                    body > div:not(.print-container-host),
+                    nav, header, footer, #contact, #services, #gallery, .no-print, button, .chatbot {
+                      display: none !important;
+                    }
+                    #printable-menu-board {
+                      position: fixed !important;
+                      top: 0 !important;
+                      left: 0 !important;
+                      width: 100% !important;
+                      height: 100% !important;
+                      padding: 40px !important;
+                      margin: 0 !important;
+                      background: #fffdfa !important;
+                      z-index: 9999999 !important;
+                    }
+                    .print-border {
+                      border-width: 4px !important;
+                    }
+                  }
+                `}} />
+
+                {/* Elegant Vintage Thai Border Frame */}
+                <div className="print-border border-8 border-double border-amber-800/35 rounded-[30px] p-6 md:p-10 bg-[#fffdfa] relative shadow-inner">
+                  {/* Decorative corner element design */}
+                  <div className="absolute top-4 left-4 text-amber-800/15 text-2xl select-none">✦</div>
+                  <div className="absolute top-4 right-4 text-amber-800/15 text-2xl select-none">✦</div>
+                  <div className="absolute bottom-4 left-4 text-amber-800/15 text-2xl select-none">✦</div>
+                  <div className="absolute bottom-4 right-4 text-amber-800/15 text-2xl select-none">✦</div>
+
+                  {/* Watermark/Logo symbol */}
+                  <div className="text-center mb-6">
+                    <span className="text-5xl block mb-2">🌸</span>
+                    <h1 className="text-3xl md:text-5xl font-serif font-bold text-[#2d1b40] tracking-wide uppercase">The Princess</h1>
+                    <p className="text-lg md:text-2xl font-serif italic text-amber-800 tracking-[0.2em]">THAI MASSAGE</p>
+                    <div className="w-32 h-0.5 bg-gradient-to-r from-transparent via-amber-800/40 to-transparent mx-auto mt-4" />
+                  </div>
+
+                  {/* Pricing Comparison Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-8">
+                    {/* Left side: Relaxing Massage */}
+                    <div className="space-y-6">
+                      <div className="flex items-center gap-2 pb-2 border-b-2 border-amber-800/20">
+                        <span className="text-2xl">🌸</span>
+                        <h2 className="text-xl md:text-2xl font-serif font-bold text-[#2d1b40]">Relaxing Massage</h2>
+                      </div>
+                      <p className="text-[14px] md:text-[15px] italic text-neutral-500 -mt-3">Hot Oil / Fresh Coconut Oil</p>
+                      
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
+                          <span className="text-neutral-700">30 Mins Treatment</span>
+                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
+                          <span className="font-bold text-amber-950 font-serif">$50</span>
+                        </div>
+                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
+                          <span className="text-neutral-700">45 Mins Treatment</span>
+                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
+                          <span className="font-bold text-amber-950 font-serif">$70</span>
+                        </div>
+                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
+                          <span className="text-neutral-700">60 Mins Treatment</span>
+                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
+                          <span className="font-bold text-amber-950 font-serif">$80</span>
+                        </div>
+                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
+                          <span className="text-neutral-700 font-bold text-[#2d1b40]">90 Mins Signature</span>
+                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
+                          <span className="font-bold text-amber-950 font-serif">$130</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right side: Deep Tissue Massage */}
+                    <div className="space-y-6">
+                      <div className="flex items-center gap-2 pb-2 border-b-2 border-amber-800/20">
+                        <span className="text-2xl">💆‍♂️</span>
+                        <h2 className="text-xl md:text-2xl font-serif font-bold text-[#2d1b40]">Deep Tissue</h2>
+                      </div>
+                      <p className="text-[14px] md:text-[15px] italic text-neutral-500 -mt-3">Hot Oil / Fresh Coconut Oil</p>
+
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
+                          <span className="text-neutral-700">30 Mins Treatment</span>
+                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
+                          <span className="font-bold text-amber-950 font-serif">$60</span>
+                        </div>
+                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
+                          <span className="text-neutral-700">45 Mins Treatment</span>
+                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
+                          <span className="font-bold text-amber-950 font-serif">$80</span>
+                        </div>
+                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
+                          <span className="text-neutral-700">60 Mins Treatment</span>
+                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
+                          <span className="font-bold text-amber-950 font-serif">$90</span>
+                        </div>
+                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
+                          <span className="text-neutral-700 font-bold text-[#2d1b40]">90 Mins Signature</span>
+                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
+                          <span className="font-bold text-amber-950 font-serif">$140</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="w-2/3 h-[1px] bg-amber-800/20 mx-auto my-8" />
+
+                  {/* Footing note & contacts */}
+                  <div className="text-center space-y-3">
+                    <p className="text-xs md:text-sm uppercase tracking-widest font-bold text-amber-950">Female Therapists Only • High-End Hygiene</p>
+                    <p className="text-xs md:text-sm text-neutral-500">Appointments are strictly required.</p>
+                    
+                    <div className="flex flex-col md:flex-row justify-center items-center gap-4 text-xs md:text-sm font-bold text-[#2d1b40] pt-2">
+                      <span className="flex items-center gap-1.5 justify-center">
+                        📞 Phone: 0427 139 455
+                      </span>
+                      <span className="hidden md:inline text-neutral-300">•</span>
+                      <span className="flex items-center gap-1.5 justify-center">
+                        📍 186 Belmore Rd, Riverwood NSW 2210
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="no-print p-6 md:p-8 bg-neutral-50 border-t border-neutral-100 flex flex-col sm:flex-row justify-end gap-4 flex-shrink-0">
+                <button 
+                  onClick={() => setShowPrintMenu(false)}
+                  className="px-8 py-3 border-2 border-neutral-200 rounded-full font-bold text-[16px] hover:bg-neutral-100 transition text-[#2d1b40] cursor-pointer"
+                >
+                  Close
+                </button>
+                <button 
+                  onClick={() => window.print()}
+                  className="px-10 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-full font-bold text-[16px] hover:from-amber-700 hover:to-amber-800 transition shadow-lg shadow-amber-600/20 flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>🖨️ Print / Save as PDF</span>
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       {/* Fixed Background Atmospheric Orchids */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <motion.img 
@@ -627,6 +852,12 @@ export default function App() {
                 <a href="#services" className="bg-white/80 backdrop-blur-sm text-[#9c77b7] border-2 border-[#9c77b7]/20 px-12 py-6 rounded-full text-xl font-bold shadow-lg hover:bg-white transition flex items-center justify-center">
                   Explore Menu
                 </a>
+                <button 
+                  onClick={() => setShowPrintMenu(true)} 
+                  className="bg-amber-100 hover:bg-amber-200 border-2 border-amber-200 text-amber-900 px-12 py-6 rounded-full text-xl font-bold shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  📜 Print Menu Board
+                </button>
               </div>
             </motion.div>
           </div>
@@ -656,36 +887,36 @@ export default function App() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
               <div className="sticky top-40">
                  <div className="relative">
-                    <AnimatePresence mode="wait">
-                      {SERVICES[activePlanIdx].video ? (
-                        <motion.video
-                          key={`srv-v-${activePlanIdx}`}
+                  <AnimatePresence mode="wait">
+                    {selectedServices[activePlanIdx]?.video ? (
+                      <motion.video
+                        key={`srv-v-${activeCategory}-${activePlanIdx}`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                        src={selectedServices[activePlanIdx].video}
+                        poster={selectedServices[activePlanIdx].image}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="rounded-[80px] shadow-[0_40px_100px_-20px_rgba(156,119,183,0.25)] relative z-10 w-full aspect-[4/5] object-cover"
+                      />
+                    ) : (
+                      <motion.img 
+                          key={`srv-i-${activeCategory}-${activePlanIdx}`}
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.5 }}
-                          src={SERVICES[activePlanIdx].video}
-                          poster={SERVICES[activePlanIdx].image}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
+                          src={selectedServices[activePlanIdx]?.image} 
+                          alt="Treatment Level" 
                           className="rounded-[80px] shadow-[0_40px_100px_-20px_rgba(156,119,183,0.25)] relative z-10 w-full aspect-[4/5] object-cover"
-                        />
-                      ) : (
-                        <motion.img 
-                            key={`srv-i-${activePlanIdx}`}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.5 }}
-                            src={SERVICES[activePlanIdx].image} 
-                            alt="Treatment Level" 
-                            className="rounded-[80px] shadow-[0_40px_100px_-20px_rgba(156,119,183,0.25)] relative z-10 w-full aspect-[4/5] object-cover"
-                            referrerPolicy="no-referrer"
-                        />
-                      )}
-                    </AnimatePresence>
+                          referrerPolicy="no-referrer"
+                      />
+                    )}
+                  </AnimatePresence>
                     <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-[#f5effa] rounded-full -z-0" />
                  </div>
                  
@@ -709,19 +940,64 @@ export default function App() {
               <div className="space-y-16">
                 <div className="space-y-6">
                     <span className="text-[#9c77b7] text-base font-bold uppercase tracking-[0.4em]">Premium Treatments</span>
-                    <h3 className="text-5xl md:text-7xl font-serif text-[#2d1b40] leading-tight">Nourish Your Body <br />& <span className="italic text-[#9c77b7]">Mind</span></h3>
-                    <p className="text-neutral-500 max-w-lg text-xl">Experience the art of relaxation through our specialized treatments, performed by professional female therapists dedicated to your wellbeing.</p>
+                    <h3 className="text-5xl md:text-7xl font-serif text-[#2d1b40] leading-tight flex flex-col">
+                      <span>Nourish Your Body</span>
+                      <span>& <span className="italic text-[#9c77b7]">Mind</span></span>
+                    </h3>
+                    <p className="text-neutral-500 max-w-lg text-xl">
+                      {activeCategory === 'relaxing' 
+                        ? 'Experience pure tranquility through rhythmic aromatherapy.' 
+                        : 'Therapeutic relief for chronic muscle tension.'}
+                    </p>
+                    
+                    {/* Category Switcher Tabs */}
+                    <div className="flex flex-wrap gap-4 pt-4 items-center justify-between w-full">
+                      <div className="flex flex-wrap gap-4">
+                        <button
+                          onClick={() => {
+                              setActiveCategory('relaxing');
+                              setActivePlanIdx(0);
+                          }}
+                          className={`px-8 py-4 rounded-full text-[16px] font-bold tracking-[0.1em] uppercase transition duration-300 flex items-center gap-2 cursor-pointer ${
+                            activeCategory === 'relaxing'
+                              ? 'bg-[#9c77b7] text-white shadow-lg shadow-[#9c77b7]/20 scale-[1.02]'
+                              : 'bg-[#fdfbff] text-[#2d1b40]/70 border border-[#9c77b7]/15 hover:bg-[#f5effa] hover:text-[#9c77b7]'
+                          }`}
+                        >
+                          🌸 Relaxing Massage
+                        </button>
+                        <button
+                          onClick={() => {
+                              setActiveCategory('deep');
+                              setActivePlanIdx(0);
+                          }}
+                          className={`px-8 py-4 rounded-full text-[16px] font-bold tracking-[0.1em] uppercase transition duration-300 flex items-center gap-2 cursor-pointer ${
+                            activeCategory === 'deep'
+                              ? 'bg-[#9c77b7] text-white shadow-lg shadow-[#9c77b7]/20 scale-[1.02]'
+                              : 'bg-[#fdfbff] text-[#2d1b40]/70 border border-[#9c77b7]/15 hover:bg-[#f5effa] hover:text-[#9c77b7]'
+                          }`}
+                        >
+                          💆‍♂️ Deep Tissue Massage
+                        </button>
+                      </div>
+                      <button
+                        onClick={() => setShowPrintMenu(true)}
+                        className="px-6 py-3.5 rounded-full text-base font-bold text-amber-800 bg-amber-50 border border-amber-200 hover:bg-amber-100 transition flex items-center gap-2 cursor-pointer shadow-sm"
+                      >
+                        📜 Print Shop Menu Board
+                      </button>
+                    </div>
                 </div>
 
                 <div className="space-y-8">
-                  {SERVICES.map((s, i) => (
+                  {selectedServices.map((s, i) => (
                     <motion.div
-                      key={i}
+                      key={`${activeCategory}-${i}`}
                       onMouseEnter={() => setActivePlanIdx(i)}
                       className={`group flex items-center justify-between p-8 md:p-10 rounded-[50px] border-2 transition-all cursor-pointer ${
                          activePlanIdx === i 
                          ? 'bg-white border-[#9c77b7]/30 shadow-2xl scale-[1.02]' 
-                         : 'bg-[#fdfbff] border-transparent grayscale-[0.5] opacity-80'
+                         : 'bg-[#fdfbff] border-transparent grayscale-[0.2] opacity-80'
                       }`}
                     >
                       <div className="flex items-center gap-8">
@@ -1026,12 +1302,12 @@ export default function App() {
                         <div className="absolute top-10 left-10 right-10 bg-white/95 backdrop-blur p-8 rounded-3xl shadow-2xl">
                              <h4 className="text-[#9c77b7] font-bold uppercase tracking-[0.2em] mb-2">Our Location</h4>
                              <a 
-                                href="https://www.google.com/maps/search/?api=1&query=186-202+Belmore+Rd,+Riverwood+NSW+2210"
+                                href="https://www.google.com/maps/search/?api=1&query=186+Belmore+Rd,+Riverwood+NSW+2210"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-[#2d1b40] font-medium mb-1 hover:text-[#9c77b7] transition-colors block"
                              >
-                                186-202 Belmore Rd, Riverwood NSW 2210
+                                186 Belmore Rd, Riverwood NSW 2210
                              </a>
                         </div>
                     </div>
@@ -1082,7 +1358,17 @@ export default function App() {
       <ChatBot />
 
       {/* Floating Call Button for Mobile */}
-      <div className="md:hidden fixed bottom-28 right-6 z-40">
+      <div className="md:hidden fixed bottom-28 right-6 z-40 flex flex-col gap-4">
+        <motion.button
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setShowPrintMenu(true)}
+          className="w-16 h-16 bg-amber-600 text-white rounded-full shadow-2xl flex items-center justify-center border-4 border-white cursor-pointer"
+          title="Print Shop Menu"
+        >
+          <span className="text-2xl">📜</span>
+        </motion.button>
         <motion.a
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
