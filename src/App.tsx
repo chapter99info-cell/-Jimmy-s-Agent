@@ -1349,7 +1349,8 @@ export default function App() {
         </div>
       </footer>
 
-      <ChatBot />
+
+      {/* <ChatBot /> */}
 
       {/* Floating Call Button for Mobile */}
       <div className="md:hidden fixed bottom-28 right-6 z-40 flex flex-col gap-4">
