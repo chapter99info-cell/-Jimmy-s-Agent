@@ -738,18 +738,12 @@ export default function App() {
               </div>
 
               {/* Actions */}
-              <div className="no-print p-6 md:p-8 bg-neutral-50 border-t border-neutral-100 flex flex-col sm:flex-row justify-end gap-4 flex-shrink-0">
+              <div className="no-print p-6 md:p-8 bg-neutral-50 border-t border-neutral-100 flex justify-center flex-shrink-0">
                 <button 
                   onClick={() => setShowPrintMenu(false)}
                   className="px-8 py-3 border-2 border-neutral-200 rounded-full font-bold text-[16px] hover:bg-neutral-100 transition text-[#2d1b40] cursor-pointer"
                 >
                   Close
-                </button>
-                <button 
-                  onClick={() => window.print()}
-                  className="px-10 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-full font-bold text-[16px] hover:from-amber-700 hover:to-amber-800 transition shadow-lg shadow-amber-600/20 flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <span>🖨️ Print / Save as PDF</span>
                 </button>
               </div>
             </motion.div>
