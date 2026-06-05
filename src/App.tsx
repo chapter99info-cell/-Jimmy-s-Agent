@@ -92,6 +92,8 @@ const GALLERY_IMAGES = [
   `${SUPABASE_MIXED_BASE}Oil03.png`,
   // 5. Elegant Hallways of Peace
   `${SUPABASE_MIXED_BASE}theprincessthaimassage02.png`,
+  // 6. Remedial massage treatment
+  'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Price%20package/ServiceRemedial_Massage.mp4',
 ];
 
 const GALLERY_TITLES = [
@@ -99,7 +101,8 @@ const GALLERY_TITLES = [
   "The Princess Thai Experience",
   "Professional Healing Space",
   "Serene Treatment Rooms",
-  "Elegant Hallways of Peace"
+  "Elegant Hallways of Peace",
+  "Remedial Massage Therapy",
 ];
 
 const SYSTEM_INSTRUCTION = `
