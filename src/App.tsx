@@ -8,36 +8,37 @@ import { Phone, MapPin, Clock, Users, X, Send, Menu, Star, ChevronLeft, ChevronR
 import { useState, useRef, useEffect } from 'react';
 
 // --- Constants & Data ---
+const SUPABASE_MIXED_BASE =
+  'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/photos/Mixed/';
+
 const RELAXING_SERVICES = [
   { 
     duration: '30 MINS', 
     price: '$50', 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Quick & focused aromatherapy relaxation',
-    // 📷 30 นาที: แสดง "ภาพนิ่ง" อย่างเดียว
-    image: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FSlide%2FGemini_Generated_Image_%20(7).png?alt=media&token=f61e2848-7264-45a3-8dde-2f680d4cfa03'
+    image: `${SUPABASE_MIXED_BASE}Oil02.png`,
   },
   { 
     duration: '45 MINS', 
     price: '$70', 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Deep and continuous oil treatment',
-    video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2FMix02.mp4?alt=media&token=2f8032da-130a-40d8-a3f5-a8750cc8a581',
+    image: `${SUPABASE_MIXED_BASE}Oil03.png`,
   },
   { 
     duration: '60 MINS', 
     price: '$80', 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Premium full-body rejuvenation',
-    // 📷 60 นาที: แสดง "ภาพนิ่ง" อย่างเดียว
-    image: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_p38wuxp38wuxp38w.png?alt=media&token=35c13691-6301-4108-9fac-508cd169f854'
+    image: `${SUPABASE_MIXED_BASE}theprincessthaimassage01.png`,
   },
   { 
     duration: '90 MINS', 
     price: '$130',
     types: 'HOT OIL | COCONUT OIL',
     description: 'The ultimate 1.5 hour serene experience',
-    video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2F%E0%B8%A7%E0%B8%B4%E0%B8%94%E0%B8%B5%E0%B9%82%E0%B8%AD%E0%B8%99%E0%B8%A7%E0%B8%94%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%AD%E0%B9%82%E0%B8%A3%E0%B8%A1%E0%B9%88%E0%B8%B2.mp4?alt=media&token=51770ab3-15c3-4e09-b612-64bb36b67bde',
+    image: `${SUPABASE_MIXED_BASE}theprincessthaimassage02.png`,
   },
 ];
 
@@ -48,28 +49,28 @@ const DEEP_TISSUE_SERVICES = [
     types: 'HOT OIL | COCONUT OIL',
     description: 'Targeted muscle recovery',
     video: 'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Price%20package/Oil01.mp4',
-    image: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FSlide%2FGemini_Generated_Image_%20(7).png?alt=media&token=f61e2848-7264-45a3-8dde-2f680d4cfa03'
+    image: `${SUPABASE_MIXED_BASE}Oil02.png`,
   },
   { 
     duration: '45 MINS', 
     price: '$80', 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Intense therapeutic oil session',
-    video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2FMix02.mp4?alt=media&token=2f8032da-130a-40d8-a3f5-a8750cc8a581',
+    image: `${SUPABASE_MIXED_BASE}Oil03.png`,
   },
   { 
     duration: '60 MINS', 
     price: '$90', 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Complete myofascial release',
-    image: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_p38wuxp38wuxp38w.png?alt=media&token=35c13691-6301-4108-9fac-508cd169f854'
+    image: `${SUPABASE_MIXED_BASE}theprincessthaimassage01.png`,
   },
   { 
     duration: '90 MINS', 
     price: '$140',
     types: 'HOT OIL | COCONUT OIL',
     description: 'Comprehensive recovery & restoration',
-    video: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2F%E0%B8%A7%E0%B8%B4%E0%B8%94%E0%B8%B5%E0%B9%82%E0%B8%AD%E0%B8%99%E0%B8%A7%E0%B8%94%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%AD%E0%B9%82%E0%B8%A3%E0%B8%A1%E0%B9%88%E0%B8%B2.mp4?alt=media&token=51770ab3-15c3-4e09-b612-64bb36b67bde',
+    image: `${SUPABASE_MIXED_BASE}theprincessthaimassage02.png`,
   },
 ];
 
@@ -80,20 +81,17 @@ const REVIEWS = [
   { name: 'Mike', text: "Professional staff and very clean shop. Feeling completely rejuvenated.", rating: 5 },
 ];
 
-const SUPABASE_GALLERY_BASE =
-  'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/photos/Mixed/';
-
 const GALLERY_IMAGES = [
   // 1. Welcome to Our Sanctuary
-  `${SUPABASE_GALLERY_BASE}Back01.png`,
+  `${SUPABASE_MIXED_BASE}Back01.png`,
   // 2. The Princess Thai Experience
-  `${SUPABASE_GALLERY_BASE}theprincessthaimassage01.png`,
+  `${SUPABASE_MIXED_BASE}theprincessthaimassage01.png`,
   // 3. Professional Healing Space
-  `${SUPABASE_GALLERY_BASE}Oil02.png`,
+  `${SUPABASE_MIXED_BASE}Oil02.png`,
   // 4. Serene Treatment Rooms
-  `${SUPABASE_GALLERY_BASE}Oil03.png`,
+  `${SUPABASE_MIXED_BASE}Oil03.png`,
   // 5. Elegant Hallways of Peace
-  `${SUPABASE_GALLERY_BASE}theprincessthaimassage02.png`,
+  `${SUPABASE_MIXED_BASE}theprincessthaimassage02.png`,
 ];
 
 const GALLERY_TITLES = [
