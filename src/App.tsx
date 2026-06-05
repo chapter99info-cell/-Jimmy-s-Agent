@@ -486,6 +486,9 @@ function ChatBot() {
   );
 }
 
+const HERO_VIDEO_URL =
+  'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Hero%20cover/Thai_princess01.mp4';
+
 export default function App() {
   const [activeCategory, setActiveCategory] = useState<'relaxing' | 'deep'>('relaxing');
   const [activePlanIdx, setActivePlanIdx] = useState(0);
@@ -493,8 +496,22 @@ export default function App() {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   const [showPrintMenu, setShowPrintMenu] = useState(false);
+  const [heroVideoSrc, setHeroVideoSrc] = useState<string | undefined>(undefined);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
 
   const selectedServices = activeCategory === 'relaxing' ? RELAXING_SERVICES : DEEP_TISSUE_SERVICES;
+
+  useEffect(() => {
+    const timer = setTimeout(() => setHeroVideoSrc(HERO_VIDEO_URL), 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!heroVideoSrc || !video) return;
+    video.load();
+    video.play().catch(() => {});
+  }, [heroVideoSrc]);
 
 
   return (
@@ -810,7 +827,10 @@ export default function App() {
         <section className="relative h-[85vh] min-h-[650px] flex items-center overflow-hidden bg-[#f5effa]">
           <div className="absolute inset-0">
             <video
-              src="https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Hero%20cover/Thai_princess01.mp4"
+              ref={heroVideoRef}
+              src={heroVideoSrc}
+              poster={GALLERY_IMAGES[0]}
+              preload="none"
               autoPlay
               muted
               loop
