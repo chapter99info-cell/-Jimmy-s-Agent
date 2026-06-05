@@ -1,0 +1,123 @@
+# Project Vision: Princess Thai Massage Website
+# File: .cursorrules — place at project root
+# Chapter99 Solutions | Sydney, Australia
+
+## 1. Goal
+Build a professional PWA website for The Princess Thai Massage
+in Riverwood NSW, Australia. Target audience: local customers
+searching for authentic Thai massage with hot oil and coconut
+oil treatments in the Canterbury-Bankstown area.
+
+Business details:
+- Name: The Princess Thai Massage
+- Address: Riverwood NSW 2210
+- Phone: 0427 139 455
+- Services: Hot Oil, Coconut Oil, Thai Traditional, Deep Tissue
+- Language: English primary, Thai secondary
+- Booking: phone call + walk-in (no online system)
+- AI Chatbot: Gemini-powered (server-side, currently disabled)
+
+## 2. Technical Stack
+- Framework: React + TypeScript + Vite
+- Hosting: Vercel (auto-deploy from GitHub)
+- Repo: github.com/chapter99info-cell/-Jimmy-s-Agent
+- Domain: princessthaimassage.com.au
+- Styling: Tailwind CSS (no custom CSS unless critical)
+- Animation: Framer Motion — subtle only
+- Icons: Lucide React
+- AI: Google Gemini API (server-side via server.ts)
+- Environment: GEMINI_API_KEY in .env only
+
+## 3. Design System
+Brand colors (use ONLY these):
+- Primary purple: #7B5EA7 (soft purple / lavender)
+- Light purple: #E8DFFF (background tint)
+- Accent gold: #D4AF37 (warm gold)
+- Background: #FAF7FF (very light lavender white)
+- Text primary: #2D1B4E (dark purple)
+- Text muted: #6B7280
+- CTA button: #7B5EA7 background, white text
+
+Typography:
+- Headings: font-serif (Georgia or Playfair Display)
+- Body: font-sans (Inter or system)
+- Thai text: Noto Sans Thai
+- Headline style: large italic serif for hero
+
+Spacing system: Tailwind defaults only
+
+## 4. SEO + AI Friendly Rules (MANDATORY)
+Every page MUST include:
+- <title>: "The Princess Thai Massage Riverwood | Authentic Thai"
+- <meta name="description"> under 160 characters
+- LocalBusiness JSON-LD schema:
+  name, address, telephone, openingHours, priceRange,
+  paymentAccepted, hasMap, url, serviceArea
+- FAQ section minimum 5 Q&A:
+  - "What oil do you use?" → Hot oil and coconut oil
+  - "Where are you located?" → Riverwood NSW
+  - "How do I book?" → Call 0427 139 455
+  - "Do you do couple massage?" → Yes
+  - "What massage styles?" → Thai, Oil, Deep Tissue
+- NAP consistent on every page
+- og:title, og:description, og:image
+
+AI-friendly content rules:
+- Direct answers in plain language
+- Service descriptions as complete sentences
+- Location mentioned naturally in content body
+- "Riverwood" and "Canterbury Bankstown" as keywords
+
+## 5. Security Rules (NON-NEGOTIABLE)
+- GEMINI_API_KEY in .env only — never in frontend code
+- AI chatbot runs server-side ONLY (server.ts handles all API calls)
+- No API keys exposed to browser
+- .env in .gitignore always
+- Rate limiting on AI endpoint: max 10 requests/minute/IP
+
+## 6. Component Rules
+AI Chatbot rules (when re-enabled):
+- Chatbot knows ONLY: services, prices, location, hours, booking
+- System prompt restricts to business context only
+- If asked off-topic: "Please call us at 0427 139 455"
+- Chatbot greeting: bilingual Thai/English
+- Disable toggle: featChatbot = false in config
+
+Menu/Print Board:
+- "Print Menu Board" button → opens printable price list
+- Prices must be easy to update in one config file
+- Menu board optimized for A4 landscape printing
+
+Call button rules:
+- "CALL 0427 139 455" → tel:0427139455 link
+- Always visible on mobile (fixed bottom or top)
+- Large tap target: minimum 44px height
+
+## 7. Gallery Rules
+- Gallery page: minimum 12 images in grid
+- Images: WebP, max 800px wide, lazy loaded
+- Alt text: "Thai massage [type] at Princess Thai Massage Riverwood"
+- Lightbox: click to expand (no external library, use CSS)
+
+## 8. Development Workflow
+- Check tailwind.config.ts FIRST before any new styles
+- Components in /src/components/[name]/index.tsx
+- Server routes in /server.ts (Express or Vite middleware)
+- git commit: "feat: [description]" or "fix: [description]"
+- Use Sonnet model — NEVER Opus unless asked
+- NEVER Multitask mode
+- Push after every working feature
+
+## 9. Current Task
+[REPLACE THIS: Describe the specific feature to build]
+Example: "Re-enable AI chatbot with rate limiting"
+Example: "Add Gallery page with 12-image grid"
+Example: "Fix mobile menu not closing on link click"
+
+## 10. Constraints
+- Headlines: 8 words maximum
+- Spa/wellness feeling — no tech-heavy language
+- Soft animations only — no jarring transitions
+- Phone number always tappable on mobile
+- Load time: under 3 seconds on 4G
+- Keep AI chatbot disabled until explicitly told to enable

@@ -809,18 +809,15 @@ export default function App() {
         {/* Hero Section */}
         <section className="relative h-[85vh] min-h-[650px] flex items-center overflow-hidden bg-[#f5effa]">
           <div className="absolute inset-0">
-            {/* Video Background */}
-            <div className="absolute right-0 bottom-0 top-0 w-full md:w-3/4 opacity-30 md:opacity-100 pointer-events-none">
-                <video 
-                    src="https://firebasestorage.googleapis.com/v0/b/studio-6368441530-fca54.firebasestorage.app/o/chapter99%20studio%2FChapter99%20Solution%2FVDO%2FCinematic_video_of_a_luxurious.mp4?alt=media&token=b38746e6-cfc2-4dfc-9317-192bbb021503"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover object-center"
-                />
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-[#f5effa] via-[#f5effa]/90 to-transparent" />
+            <video
+              src="https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Hero%20cover/Thai_princess01.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute top-0 left-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/40" />
           </div>
 
           <div className="relative max-w-7xl mx-auto px-6 w-full">
