@@ -218,13 +218,21 @@
           timeout = timeout || 20000;
           return new Promise(function (resolve, reject) {
             var start = Date.now();
+            var rafId = 0;
+            var done = false;
+            function finish(fn, value) {
+              if (done) return;
+              done = true;
+              cancelAnimationFrame(rafId);
+              fn(value);
+            }
             function tick() {
               var el = document.querySelector(selector);
-              if (el) return resolve(el);
-              if (Date.now() - start > timeout) return reject(new Error('timeout: ' + selector));
-              requestAnimationFrame(tick);
+              if (el) return finish(resolve, el);
+              if (Date.now() - start > timeout) return finish(reject, new Error('timeout: ' + selector));
+              rafId = requestAnimationFrame(tick);
             }
-            tick();
+            rafId = requestAnimationFrame(tick);
           });
         }
 
@@ -240,75 +248,10 @@
           }, 2200);
         })();
 
-        /* 3. Scroll progress bar */
-        (function initScrollProgress() {
-          var bar = document.getElementById('ptm-scroll-progress');
-          if (!bar) return;
-          function update() {
-            var scrollTop = window.scrollY || document.documentElement.scrollTop;
-            var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-            bar.style.width = pct + '%';
-          }
-          window.addEventListener('scroll', update, { passive: true });
-          update();
-        })();
-
-        /* 2. Custom cursor (desktop) */
-        (function initCustomCursor() {
-          var dot = document.getElementById('ptm-cursor-dot');
-          var ring = document.getElementById('ptm-cursor-ring');
-          if (!dot || !ring) return;
-
-          var mouseX = window.innerWidth / 2;
-          var mouseY = window.innerHeight / 2;
-          var dotX = mouseX, dotY = mouseY;
-          var ringX = mouseX, ringY = mouseY;
-          var enabled = false;
-
-          function checkWidth() {
-            enabled = window.innerWidth > 768;
-            document.body.classList.toggle('ptm-cursor-on', enabled);
-            if (!enabled) {
-              dot.style.display = 'none';
-              ring.style.display = 'none';
-            } else {
-              dot.style.display = '';
-              ring.style.display = '';
-            }
-          }
-          checkWidth();
-          window.addEventListener('resize', checkWidth);
-
-          document.addEventListener('mousemove', function (e) {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-          });
-
-          function frame() {
-            if (enabled) {
-              dotX = lerp(dotX, mouseX, 0.35);
-              dotY = lerp(dotY, mouseY, 0.35);
-              ringX = lerp(ringX, mouseX, 0.12);
-              ringY = lerp(ringY, mouseY, 0.12);
-              dot.style.left = dotX + 'px';
-              dot.style.top = dotY + 'px';
-              ring.style.left = ringX + 'px';
-              ring.style.top = ringY + 'px';
-            }
-            requestAnimationFrame(frame);
-          }
-          frame();
-        })();
-
         /* App-dependent features after React mount */
         function initAppFeatures() {
           waitFor('main section').then(function () {
-            var hero = document.querySelector('main > section');
             var servicesSection = document.getElementById('services');
-
-            if (hero) initWaterRipple(hero);
-            initMagneticCTA();
 
             if (servicesSection) {
               initStaggerReveal(servicesSection);
@@ -322,116 +265,6 @@
           document.addEventListener('DOMContentLoaded', initAppFeatures);
         } else {
           initAppFeatures();
-        }
-
-        /* 4. Water ripple on hero */
-        function initWaterRipple(hero) {
-          if (hero.querySelector('#ptm-ripple-canvas')) return;
-
-          var canvas = document.createElement('canvas');
-          canvas.id = 'ptm-ripple-canvas';
-          hero.style.position = hero.style.position || '';
-          if (getComputedStyle(hero).position === 'static') hero.style.position = 'relative';
-          hero.appendChild(canvas);
-
-          var ctx = canvas.getContext('2d');
-          var ripples = [];
-          var w = 0, h = 0;
-
-          function resize() {
-            var rect = hero.getBoundingClientRect();
-            w = canvas.width = Math.floor(rect.width);
-            h = canvas.height = Math.floor(rect.height);
-          }
-          resize();
-          window.addEventListener('resize', resize);
-
-          function addRipple(clientX, clientY) {
-            var rect = hero.getBoundingClientRect();
-            ripples.push({
-              x: clientX - rect.left,
-              y: clientY - rect.top,
-              r: 4,
-              alpha: 0.55
-            });
-          }
-
-          hero.addEventListener('mousemove', function (e) {
-            addRipple(e.clientX, e.clientY);
-          });
-          hero.addEventListener('touchstart', function (e) {
-            if (e.touches[0]) addRipple(e.touches[0].clientX, e.touches[0].clientY);
-          }, { passive: true });
-          hero.addEventListener('touchmove', function (e) {
-            if (e.touches[0]) addRipple(e.touches[0].clientX, e.touches[0].clientY);
-          }, { passive: true });
-
-          (function draw() {
-            ctx.clearRect(0, 0, w, h);
-            ripples = ripples.filter(function (r) { return r.alpha > 0.02; });
-            ripples.forEach(function (r) {
-              r.r += 1.8;
-              r.alpha *= 0.965;
-              ctx.beginPath();
-              ctx.arc(r.x, r.y, r.r, 0, Math.PI * 2);
-              ctx.strokeStyle = 'rgba(212, 168, 83, ' + (r.alpha * 0.7) + ')';
-              ctx.lineWidth = 1.5;
-              ctx.stroke();
-              if (r.r > 6) {
-                ctx.beginPath();
-                ctx.arc(r.x, r.y, r.r * 0.65, 0, Math.PI * 2);
-                ctx.strokeStyle = 'rgba(156, 119, 183, ' + (r.alpha * 0.35) + ')';
-                ctx.lineWidth = 1;
-                ctx.stroke();
-              }
-            });
-            requestAnimationFrame(draw);
-          })();
-        }
-
-        /* 5. Magnetic CTA */
-        function initMagneticCTA() {
-          var btn = document.querySelector('a[href="tel:0427139455"]');
-          if (!btn || btn.dataset.ptmMagnetic) return;
-          btn.dataset.ptmMagnetic = '1';
-
-          var radius = 80;
-          var factor = 0.35;
-          var targetX = 0, targetY = 0;
-          var currentX = 0, currentY = 0;
-          var hovering = false;
-
-          btn.addEventListener('mouseenter', function () { hovering = true; });
-          btn.addEventListener('mouseleave', function () {
-            hovering = false;
-            targetX = 0;
-            targetY = 0;
-          });
-
-          document.addEventListener('mousemove', function (e) {
-            if (!hovering) return;
-            var rect = btn.getBoundingClientRect();
-            var cx = rect.left + rect.width / 2;
-            var cy = rect.top + rect.height / 2;
-            var dx = e.clientX - cx;
-            var dy = e.clientY - cy;
-            var dist = Math.hypot(dx, dy);
-            if (dist < radius) {
-              targetX = dx * factor;
-              targetY = dy * factor;
-            } else {
-              targetX = 0;
-              targetY = 0;
-            }
-          });
-
-          (function animate() {
-            var ease = hovering ? 0.2 : 0.12;
-            currentX = lerp(currentX, targetX, ease);
-            currentY = lerp(currentY, targetY, ease);
-            btn.style.transform = 'translate(' + currentX + 'px, ' + currentY + 'px)';
-            requestAnimationFrame(animate);
-          })();
         }
 
         /* 6. Stagger reveal on service cards */
@@ -471,16 +304,21 @@
 
         function animatePrice(el, finalValue, duration) {
           duration = duration || 800;
+          if (el._ptmPriceRaf) cancelAnimationFrame(el._ptmPriceRaf);
           var start = null;
           function step(ts) {
             if (!start) start = ts;
             var p = Math.min((ts - start) / duration, 1);
             var val = Math.round(easeOutQuart(p) * finalValue);
             el.textContent = '$' + val;
-            if (p < 1) requestAnimationFrame(step);
-            else el.textContent = '$' + finalValue;
+            if (p < 1) {
+              el._ptmPriceRaf = requestAnimationFrame(step);
+            } else {
+              el._ptmPriceRaf = 0;
+              el.textContent = '$' + finalValue;
+            }
           }
-          requestAnimationFrame(step);
+          el._ptmPriceRaf = requestAnimationFrame(step);
         }
 
         function getPriceSpan(card) {
@@ -573,7 +411,7 @@
             highlightCard(activeDur);
             initPriceCountUp(section);
           });
-          mo.observe(container, { childList: true, subtree: true });
+          mo.observe(container, { childList: true });
         }
       })();
     </script>

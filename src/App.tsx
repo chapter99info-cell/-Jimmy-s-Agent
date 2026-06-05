@@ -498,6 +498,8 @@ export default function App() {
   const [showPrintMenu, setShowPrintMenu] = useState(false);
   const [heroVideoSrc, setHeroVideoSrc] = useState<string | undefined>(undefined);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const ctaRef = useRef<HTMLAnchorElement>(null);
 
   const selectedServices = activeCategory === 'relaxing' ? RELAXING_SERVICES : DEEP_TISSUE_SERVICES;
 
@@ -512,6 +514,234 @@ export default function App() {
     video.load();
     video.play().catch(() => {});
   }, [heroVideoSrc]);
+
+  useEffect(() => {
+    const bar = document.getElementById('ptm-scroll-progress');
+    if (!bar) return;
+
+    const update = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      bar.style.width = `${pct}%`;
+    };
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+
+    return () => window.removeEventListener('scroll', update);
+  }, []);
+
+  useEffect(() => {
+    const dot = document.getElementById('ptm-cursor-dot');
+    const ring = document.getElementById('ptm-cursor-ring');
+    if (!dot || !ring) return;
+
+    let active = true;
+    let rafId = 0;
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let dotX = mouseX;
+    let dotY = mouseY;
+    let ringX = mouseX;
+    let ringY = mouseY;
+    let enabled = window.innerWidth > 768;
+
+    const onResize = () => {
+      enabled = window.innerWidth > 768;
+      document.body.classList.toggle('ptm-cursor-on', enabled);
+      dot.style.display = enabled ? '' : 'none';
+      ring.style.display = enabled ? '' : 'none';
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    };
+
+    onResize();
+    window.addEventListener('resize', onResize);
+    document.addEventListener('mousemove', onMouseMove);
+
+    const frame = () => {
+      if (!active) return;
+      if (enabled) {
+        dotX += (mouseX - dotX) * 0.35;
+        dotY += (mouseY - dotY) * 0.35;
+        ringX += (mouseX - ringX) * 0.12;
+        ringY += (mouseY - ringY) * 0.12;
+        dot.style.left = `${dotX}px`;
+        dot.style.top = `${dotY}px`;
+        ring.style.left = `${ringX}px`;
+        ring.style.top = `${ringY}px`;
+      }
+      rafId = requestAnimationFrame(frame);
+    };
+    rafId = requestAnimationFrame(frame);
+
+    return () => {
+      active = false;
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', onResize);
+      document.removeEventListener('mousemove', onMouseMove);
+      document.body.classList.remove('ptm-cursor-on');
+    };
+  }, []);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+
+    let active = true;
+    let rafId = 0;
+
+    const canvas = document.createElement('canvas');
+    canvas.id = 'ptm-ripple-canvas';
+    canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;';
+    hero.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
+      canvas.remove();
+      return;
+    }
+
+    const ripples: { x: number; y: number; r: number; alpha: number }[] = [];
+    let w = 0;
+    let h = 0;
+    let lastRippleAt = 0;
+
+    const resize = () => {
+      const rect = hero.getBoundingClientRect();
+      w = canvas.width = Math.floor(rect.width);
+      h = canvas.height = Math.floor(rect.height);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const addRipple = (clientX: number, clientY: number) => {
+      const now = Date.now();
+      if (now - lastRippleAt < 80) return;
+      lastRippleAt = now;
+      if (ripples.length > 40) ripples.shift();
+      const rect = hero.getBoundingClientRect();
+      ripples.push({
+        x: clientX - rect.left,
+        y: clientY - rect.top,
+        r: 4,
+        alpha: 0.55,
+      });
+    };
+
+    const onMouseMove = (e: MouseEvent) => addRipple(e.clientX, e.clientY);
+    const onTouch = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (touch) addRipple(touch.clientX, touch.clientY);
+    };
+
+    hero.addEventListener('mousemove', onMouseMove);
+    hero.addEventListener('touchstart', onTouch, { passive: true });
+    hero.addEventListener('touchmove', onTouch, { passive: true });
+
+    const draw = () => {
+      if (!active) return;
+      ctx.clearRect(0, 0, w, h);
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const ripple = ripples[i];
+        if (ripple.alpha <= 0.02) {
+          ripples.splice(i, 1);
+          continue;
+        }
+        ripple.r += 1.8;
+        ripple.alpha *= 0.965;
+        ctx.beginPath();
+        ctx.arc(ripple.x, ripple.y, ripple.r, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(212, 168, 83, ${ripple.alpha * 0.7})`;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        if (ripple.r > 6) {
+          ctx.beginPath();
+          ctx.arc(ripple.x, ripple.y, ripple.r * 0.65, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(156, 119, 183, ${ripple.alpha * 0.35})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+      rafId = requestAnimationFrame(draw);
+    };
+    rafId = requestAnimationFrame(draw);
+
+    return () => {
+      active = false;
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', resize);
+      hero.removeEventListener('mousemove', onMouseMove);
+      hero.removeEventListener('touchstart', onTouch);
+      hero.removeEventListener('touchmove', onTouch);
+      canvas.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    const btn = ctaRef.current;
+    if (!btn) return;
+
+    let active = true;
+    let rafId = 0;
+    const radius = 80;
+    const factor = 0.35;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let hovering = false;
+
+    const onEnter = () => {
+      hovering = true;
+    };
+    const onLeave = () => {
+      hovering = false;
+      targetX = 0;
+      targetY = 0;
+    };
+    const onMouseMove = (e: MouseEvent) => {
+      if (!hovering) return;
+      const rect = btn.getBoundingClientRect();
+      const dx = e.clientX - (rect.left + rect.width / 2);
+      const dy = e.clientY - (rect.top + rect.height / 2);
+      const dist = Math.hypot(dx, dy);
+      if (dist < radius) {
+        targetX = dx * factor;
+        targetY = dy * factor;
+      } else {
+        targetX = 0;
+        targetY = 0;
+      }
+    };
+
+    btn.addEventListener('mouseenter', onEnter);
+    btn.addEventListener('mouseleave', onLeave);
+    document.addEventListener('mousemove', onMouseMove);
+
+    const animate = () => {
+      if (!active) return;
+      const ease = hovering ? 0.2 : 0.12;
+      currentX += (targetX - currentX) * ease;
+      currentY += (targetY - currentY) * ease;
+      btn.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      rafId = requestAnimationFrame(animate);
+    };
+    rafId = requestAnimationFrame(animate);
+
+    return () => {
+      active = false;
+      cancelAnimationFrame(rafId);
+      btn.removeEventListener('mouseenter', onEnter);
+      btn.removeEventListener('mouseleave', onLeave);
+      document.removeEventListener('mousemove', onMouseMove);
+      btn.style.transform = '';
+    };
+  }, []);
 
 
   return (
@@ -824,7 +1054,7 @@ export default function App() {
 
       <main className="pt-24 md:pt-32">
         {/* Hero Section */}
-        <section className="relative h-[85vh] min-h-[650px] flex items-center overflow-hidden bg-[#f5effa]">
+        <section ref={heroRef} className="relative h-[85vh] min-h-[650px] flex items-center overflow-hidden bg-[#f5effa]">
           <div className="absolute inset-0">
             <video
               ref={heroVideoRef}
@@ -856,7 +1086,7 @@ export default function App() {
                 Experience the ultimate comfort with our Hot Oil and Coconut Oil treatments.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
-                <a href="tel:0427139455" className="bg-[#9c77b7] text-white px-12 py-6 rounded-full text-xl font-bold shadow-xl hover:bg-[#8659a3] transition flex items-center justify-center gap-3">
+                <a ref={ctaRef} href="tel:0427139455" className="bg-[#9c77b7] text-white px-12 py-6 rounded-full text-xl font-bold shadow-xl hover:bg-[#8659a3] transition flex items-center justify-center gap-3">
                   <Phone size={28} />
                   CALL 0427 139 455
                 </a>
