@@ -47,6 +47,7 @@ const DEEP_TISSUE_SERVICES = [
     price: '$60', 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Targeted muscle recovery',
+    video: 'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Price%20package/Oil01.mp4',
     image: 'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FSlide%2FGemini_Generated_Image_%20(7).png?alt=media&token=f61e2848-7264-45a3-8dde-2f680d4cfa03'
   },
   { 
