@@ -1480,15 +1480,15 @@ export default function App() {
                     
                     <div className="lg:w-1/3 w-full h-[400px] lg:h-[600px] rounded-[60px] overflow-hidden shadow-2xl relative">
                         <video 
-                            src="https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/VDo%2Fa_be_ccf_b_da_c_e_f_ed_e_e_f_bb_f_f_c_c_mp_.mp4?alt=media&token=afb53eb8-48e4-4052-ba8a-4d4b4b88d833" 
-                            className="w-full h-full object-cover" 
+                            src="https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Price%20package/ServiceRemedial_Massage.mp4" 
+                            className="absolute inset-0 w-full h-full object-cover" 
                             autoPlay
                             muted
                             loop
                             playsInline
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#2d1b40]/80 via-transparent to-transparent" />
-                        <div className="absolute bottom-10 left-10 right-10 text-white">
+                        <div className="absolute inset-0 z-[1]" style={{ background: 'rgba(0, 0, 0, 0.4)' }} />
+                        <div className="absolute bottom-10 left-10 right-10 z-[2] text-white">
                             <span className="text-[#9c77b7] font-bold uppercase tracking-[0.3em] text-xs mb-2 block">Our Atmosphere</span>
                             <p className="text-2xl font-serif leading-tight">A sanctuary of peace designed for your rejuvenation.</p>
                         </div>
