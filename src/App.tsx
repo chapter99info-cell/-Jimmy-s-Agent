@@ -79,21 +79,20 @@ const REVIEWS = [
   { name: 'Mike', text: "Professional staff and very clean shop. Feeling completely rejuvenated.", rating: 5 },
 ];
 
+const SUPABASE_GALLERY_BASE =
+  'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/photos/Mixed/';
+
 const GALLERY_IMAGES = [
-  // 1. Welcome to Our Sanctuary (รูปหินร้อน ดอกไม้ บรรยากาศผ่อนคลาย)
-  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_jjyw4djjyw4djjyw.png?alt=media&token=3874f76b-3136-4f54-b82c-f8544295a619',
-  
-  // 2. The Princess Thai Experience (รูปการนวดน้ำมันระดับพรีเมียม)
-  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_57v0bp57v0bp57v0.png?alt=media&token=43ce17fd-7bc0-42d2-a138-564fc51379d9',
-  
-  // 3. Professional Healing Space (รูปน้ำมันอโรม่าและเทียนหอมในห้องนวด)
-  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FGemini_Generated_Image_i6lwnyi6lwnyi6lw.png?alt=media&token=d92412b1-22fd-4078-a69c-785727c3a211',
-  
-  // 4. Serene Treatment Rooms (รูปเตียงนวดไทยและการเซตอัปห้องที่สวยงาม)
-  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FSlide%2FGemini_Generated_Image_%20(9).png?alt=media&token=554cd51b-e661-46c0-be35-7cb981a4b020',
-  
-  // 5. Elegant Hallways of Peace (รูปเบาะพักผ่อนและผ้าขนหนูสไตล์โรงแรม 5 ดาว)
-  'https://firebasestorage.googleapis.com/v0/b/the-princess-thai-massage.firebasestorage.app/o/Photos%2FSlide%2FGemini_Generated_Image_%20(8).png?alt=media&token=ceb8472b-745f-4f8f-8cd4-659e11bcd7d4'
+  // 1. Welcome to Our Sanctuary
+  `${SUPABASE_GALLERY_BASE}Back01.png`,
+  // 2. The Princess Thai Experience
+  `${SUPABASE_GALLERY_BASE}theprincessthaimassage01.png`,
+  // 3. Professional Healing Space
+  `${SUPABASE_GALLERY_BASE}Oil02.png`,
+  // 4. Serene Treatment Rooms
+  `${SUPABASE_GALLERY_BASE}Oil03.png`,
+  // 5. Elegant Hallways of Peace
+  `${SUPABASE_GALLERY_BASE}theprincessthaimassage02.png`,
 ];
 
 const GALLERY_TITLES = [
