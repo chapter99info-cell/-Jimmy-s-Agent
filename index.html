@@ -187,61 +187,6 @@
       .ptm-duration-highlight {
         box-shadow: 0 0 0 2px rgba(212, 168, 83, 0.55), 0 25px 50px -12px rgba(156, 119, 183, 0.25) !important;
       }
-
-      #ptm-exit-popup {
-        position: fixed;
-        inset: 0;
-        z-index: 100001;
-        background: rgba(45, 27, 64, 0.45);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 24px;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.35s ease;
-      }
-      #ptm-exit-popup.ptm-exit-show {
-        opacity: 1;
-        pointer-events: auto;
-      }
-      #ptm-exit-popup .ptm-exit-inner {
-        position: relative;
-        max-width: 440px;
-        width: 100%;
-        background: #fffdfa;
-        border: 2px solid rgba(156, 119, 183, 0.2);
-        border-radius: 24px;
-        padding: 36px 32px 28px;
-        box-shadow: 0 30px 80px rgba(45, 27, 64, 0.18);
-        text-align: center;
-      }
-      #ptm-exit-popup .ptm-exit-inner p {
-        font-family: 'Libre Baskerville', 'Playfair Display', Georgia, serif;
-        font-size: 1.125rem;
-        line-height: 1.6;
-        color: #2d1b40;
-        margin: 0;
-      }
-      #ptm-exit-close {
-        position: absolute;
-        top: 12px;
-        right: 14px;
-        width: 32px;
-        height: 32px;
-        border: none;
-        background: transparent;
-        font-size: 1.5rem;
-        line-height: 1;
-        color: #9c77b7;
-        cursor: pointer;
-        padding: 0;
-      }
-      @media (max-width: 768px) {
-        #ptm-exit-popup {
-          display: none !important;
-        }
-      }
     </style>
   </head>
   <body>
@@ -252,12 +197,6 @@
     <div id="ptm-scroll-progress" aria-hidden="true"></div>
     <div id="ptm-cursor-dot" aria-hidden="true"></div>
     <div id="ptm-cursor-ring" aria-hidden="true"></div>
-    <div id="ptm-exit-popup" aria-hidden="true">
-      <div class="ptm-exit-inner">
-        <button id="ptm-exit-close" type="button" aria-label="Close">&times;</button>
-        <p>Before you go — mention this popup for $10 off your first visit</p>
-      </div>
-    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script>
@@ -360,33 +299,6 @@
             requestAnimationFrame(frame);
           }
           frame();
-        })();
-
-        /* 10. Exit intent popup */
-        (function initExitIntent() {
-          var popup = document.getElementById('ptm-exit-popup');
-          var closeBtn = document.getElementById('ptm-exit-close');
-          if (!popup) return;
-
-          function hide() {
-            popup.classList.remove('ptm-exit-show');
-            popup.setAttribute('aria-hidden', 'true');
-          }
-
-          if (closeBtn) closeBtn.addEventListener('click', hide);
-          popup.addEventListener('click', function (e) {
-            if (e.target === popup) hide();
-          });
-
-          document.addEventListener('mouseout', function (e) {
-            if (window.innerWidth <= 768) return;
-            if (sessionStorage.getItem('ptm-exit-shown')) return;
-            if (e.clientY <= 0 && (!e.relatedTarget || e.relatedTarget.nodeName === 'HTML')) {
-              sessionStorage.setItem('ptm-exit-shown', '1');
-              popup.classList.add('ptm-exit-show');
-              popup.setAttribute('aria-hidden', 'false');
-            }
-          });
         })();
 
         /* App-dependent features after React mount */
