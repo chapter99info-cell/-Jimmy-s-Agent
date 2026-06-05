@@ -1067,22 +1067,22 @@ export default function App() {
               playsInline
               className="absolute top-0 left-0 w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/40" />
+            <div className="absolute inset-0 z-[1]" style={{ background: 'rgba(0, 0, 0, 0.45)' }} />
           </div>
 
-          <div className="relative max-w-7xl mx-auto px-6 w-full">
+          <div className="relative z-[2] max-w-7xl mx-auto px-6 w-full">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1 }}
               className="max-w-2xl"
             >
-              <h2 className="text-6xl md:text-9xl font-serif leading-[1.1] mb-8 text-[#2d1b40]">
+              <h2 className="text-6xl md:text-9xl font-serif leading-[1.1] mb-8 text-white">
                 Authentic Thai <br />
-                <span className="text-[#9c77b7] italic">Relaxation</span> <br />
-                <span className="font-light">Riverwood.</span>
+                <span className="text-[#D4B8FF] italic">Relaxation</span> <br />
+                <span className="font-light text-white">Riverwood.</span>
               </h2>
-              <p className="text-2xl md:text-3xl text-neutral-600 font-light mb-12 tracking-wide font-serif italic">
+              <p className="text-2xl md:text-3xl text-[#F0F0F0] font-light mb-12 tracking-wide font-serif italic">
                 Experience the ultimate comfort with our Hot Oil and Coconut Oil treatments.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
