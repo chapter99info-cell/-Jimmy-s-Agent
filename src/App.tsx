@@ -500,9 +500,11 @@ export default function App() {
   const [heroVideoSrc, setHeroVideoSrc] = useState<string | undefined>(undefined);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const atmosphereVideoRef = useRef<HTMLVideoElement>(null);
+  const servicesPanelVideoRef = useRef<HTMLVideoElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const ctaRef = useRef<HTMLAnchorElement>(null);
   const [atmosphereMuted, setAtmosphereMuted] = useState(true);
+  const [servicesPanelMuted, setServicesPanelMuted] = useState(true);
 
   const selectedServices = activeCategory === 'relaxing' ? RELAXING_SERVICES : DEEP_TISSUE_SERVICES;
 
@@ -1131,36 +1133,29 @@ export default function App() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
               <div className="sticky top-40">
                  <div className="relative">
-                  <AnimatePresence mode="wait">
-                    {selectedServices[activePlanIdx]?.video ? (
-                      <motion.video
-                        key={`srv-v-${activeCategory}-${activePlanIdx}`}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        src={selectedServices[activePlanIdx].video}
-                        poster={selectedServices[activePlanIdx].image}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="rounded-[80px] shadow-[0_40px_100px_-20px_rgba(156,119,183,0.25)] relative z-10 w-full aspect-[4/5] object-cover"
-                      />
-                    ) : (
-                      <motion.img 
-                          key={`srv-i-${activeCategory}-${activePlanIdx}`}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.5 }}
-                          src={selectedServices[activePlanIdx]?.image} 
-                          alt="Treatment Level" 
-                          className="rounded-[80px] shadow-[0_40px_100px_-20px_rgba(156,119,183,0.25)] relative z-10 w-full aspect-[4/5] object-cover"
-                          referrerPolicy="no-referrer"
-                      />
-                    )}
-                  </AnimatePresence>
+                    <video
+                      ref={servicesPanelVideoRef}
+                      src="https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Main/ThaiP_VDO01.mp4"
+                      className="rounded-[80px] shadow-[0_40px_100px_-20px_rgba(156,119,183,0.25)] relative z-10 w-full aspect-[4/5] object-cover"
+                      autoPlay
+                      muted={servicesPanelMuted}
+                      loop
+                      playsInline
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const nextMuted = !servicesPanelMuted;
+                        setServicesPanelMuted(nextMuted);
+                        if (servicesPanelVideoRef.current) {
+                          servicesPanelVideoRef.current.muted = nextMuted;
+                        }
+                      }}
+                      className="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-white/50 hover:bg-white/70 flex items-center justify-center text-lg shadow-md backdrop-blur-sm"
+                      aria-label={servicesPanelMuted ? 'Unmute video' : 'Mute video'}
+                    >
+                      {servicesPanelMuted ? '🔇' : '🔊'}
+                    </button>
                     <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-[#f5effa] rounded-full -z-0" />
                  </div>
                  
