@@ -499,8 +499,10 @@ export default function App() {
   const [showPrintMenu, setShowPrintMenu] = useState(false);
   const [heroVideoSrc, setHeroVideoSrc] = useState<string | undefined>(undefined);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const atmosphereVideoRef = useRef<HTMLVideoElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const ctaRef = useRef<HTMLAnchorElement>(null);
+  const [atmosphereMuted, setAtmosphereMuted] = useState(true);
 
   const selectedServices = activeCategory === 'relaxing' ? RELAXING_SERVICES : DEEP_TISSUE_SERVICES;
 
@@ -1483,14 +1485,29 @@ export default function App() {
                     
                     <div className="lg:w-1/3 w-full h-[400px] lg:h-[600px] rounded-[60px] overflow-hidden shadow-2xl relative">
                         <video 
-                            src="https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Price%20package/ServiceRemedial_Massage.mp4" 
+                            ref={atmosphereVideoRef}
+                            src="https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Main/ThaiP_VDO01.mp4" 
                             className="absolute inset-0 w-full h-full object-cover" 
                             autoPlay
-                            muted
+                            muted={atmosphereMuted}
                             loop
                             playsInline
                         />
                         <div className="absolute inset-0 z-[1]" style={{ background: 'rgba(0, 0, 0, 0.4)' }} />
+                        <button
+                            type="button"
+                            onClick={() => {
+                              const nextMuted = !atmosphereMuted;
+                              setAtmosphereMuted(nextMuted);
+                              if (atmosphereVideoRef.current) {
+                                atmosphereVideoRef.current.muted = nextMuted;
+                              }
+                            }}
+                            className="absolute bottom-4 right-4 z-[3] w-10 h-10 rounded-full bg-white/70 hover:bg-white/90 flex items-center justify-center text-lg shadow-md backdrop-blur-sm"
+                            aria-label={atmosphereMuted ? 'Unmute video' : 'Mute video'}
+                        >
+                            {atmosphereMuted ? '🔇' : '🔊'}
+                        </button>
                         <div className="absolute bottom-10 left-10 right-10 z-[2] text-white">
                             <span className="text-[#9c77b7] font-bold uppercase tracking-[0.3em] text-xs mb-2 block">Our Atmosphere</span>
                             <p className="text-2xl font-serif leading-tight">A sanctuary of peace designed for your rejuvenation.</p>
