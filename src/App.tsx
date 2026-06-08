@@ -490,6 +490,12 @@ function ChatBot() {
 const HERO_VIDEO_URL =
   'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Hero%20cover/Thai_princess01.mp4';
 
+const SERVICES_PANEL_VIDEO_URL =
+  'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Main/ThaiP_VDO01.mp4';
+
+const ATMOSPHERE_VIDEO_URL =
+  'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Main/cover02.mp4';
+
 export default function App() {
   const [activeCategory, setActiveCategory] = useState<'relaxing' | 'deep'>('relaxing');
   const [activePlanIdx, setActivePlanIdx] = useState(0);
@@ -519,6 +525,22 @@ export default function App() {
     video.load();
     video.play().catch(() => {});
   }, [heroVideoSrc]);
+
+  useEffect(() => {
+    const video = servicesPanelVideoRef.current;
+    if (!video) return;
+    video.muted = servicesPanelMuted;
+    video.load();
+    video.play().catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    const video = atmosphereVideoRef.current;
+    if (!video) return;
+    video.muted = atmosphereMuted;
+    video.load();
+    video.play().catch(() => {});
+  }, []);
 
   useEffect(() => {
     const bar = document.getElementById('ptm-scroll-progress');
@@ -1135,12 +1157,13 @@ export default function App() {
                  <div className="relative">
                     <video
                       ref={servicesPanelVideoRef}
-                      src="https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Main/ThaiP_VDO01.mp4"
-                      className="rounded-[80px] shadow-[0_40px_100px_-20px_rgba(156,119,183,0.25)] relative z-10 w-full aspect-[4/5] object-cover"
+                      src={SERVICES_PANEL_VIDEO_URL}
+                      className="rounded-[80px] shadow-[0_40px_100px_-20px_rgba(156,119,183,0.25)] relative z-10 block w-full h-full aspect-[4/5] object-cover"
                       autoPlay
                       muted={servicesPanelMuted}
                       loop
                       playsInline
+                      preload="auto"
                     />
                     <button
                       type="button"
@@ -1481,12 +1504,13 @@ export default function App() {
                     <div className="lg:w-1/3 w-full h-[400px] lg:h-[600px] rounded-[60px] overflow-hidden shadow-2xl relative">
                         <video 
                             ref={atmosphereVideoRef}
-                            src="https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Main/ThaiP_VDO01.mp4" 
+                            src={ATMOSPHERE_VIDEO_URL}
                             className="absolute inset-0 w-full h-full object-cover" 
                             autoPlay
                             muted={atmosphereMuted}
                             loop
                             playsInline
+                            preload="auto"
                         />
                         <div className="absolute inset-0 z-[1]" style={{ background: 'rgba(0, 0, 0, 0.4)' }} />
                         <button
