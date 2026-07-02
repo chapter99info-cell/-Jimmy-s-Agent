@@ -1041,13 +1041,22 @@ export default function App() {
             <a href="#services" className="hover:text-[#9c77b7] transition">Services</a>
             <a href="#gallery" className="hover:text-[#9c77b7] transition">Gallery</a>
             <a href="#contact" className="hover:text-[#9c77b7] transition">Contact</a>
-            <a
-               href="tel:0295338849"
-               className="bg-[#9c77b7] text-white px-10 py-5 rounded-full hover:bg-[#8659a3] transition shadow-lg text-lg flex items-center gap-2"
-            >
-              <Phone size={24} />
-              Call 02 9533 8849
-            </a>
+            <div className="flex items-center gap-4">
+              <a
+                href="tel:0295338849"
+                className="bg-[#9c77b7] text-white px-8 py-4 rounded-full hover:bg-[#8659a3] transition shadow-lg text-[16px] flex items-center gap-2"
+              >
+                <Phone size={20} />
+                Call 02 9533 8849
+              </a>
+              <a
+                href="tel:+61427139455"
+                className="bg-white text-[#9c77b7] border-2 border-[#9c77b7]/20 px-8 py-4 rounded-full hover:bg-[#f5effa] transition shadow-lg text-[16px] flex items-center gap-2"
+              >
+                <Phone size={20} />
+                Mobile: 0427 139 455 (SMS)
+              </a>
+            </div>
           </div>
           <button className="md:hidden p-2 text-[#9c77b7]">
             <Menu size={32} />
@@ -1089,10 +1098,23 @@ export default function App() {
                 Experience the ultimate comfort with our Hot Oil and Coconut Oil treatments.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
-                <a ref={ctaRef} href="tel:0295338849" className="bg-[#9c77b7] text-white px-12 py-6 rounded-full text-xl font-bold shadow-xl hover:bg-[#8659a3] transition flex items-center justify-center gap-3">
-                  <Phone size={28} />
-                  CALL 02 9533 8849
-                </a>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a
+                    ref={ctaRef}
+                    href="tel:0295338849"
+                    className="bg-[#9c77b7] text-white px-12 py-6 rounded-full text-xl font-bold shadow-xl hover:bg-[#8659a3] transition flex items-center justify-center gap-3"
+                  >
+                    <Phone size={28} />
+                    CALL 02 9533 8849
+                  </a>
+                  <a
+                    href="tel:+61427139455"
+                    className="bg-white/80 backdrop-blur-sm text-[#9c77b7] border-2 border-[#9c77b7]/20 px-12 py-6 rounded-full text-xl font-bold shadow-lg hover:bg-white transition flex items-center justify-center gap-3"
+                  >
+                    <Phone size={28} />
+                    MOBILE 0427 139 455 (SMS)
+                  </a>
+                </div>
                 <a href="#services" className="bg-white/80 backdrop-blur-sm text-[#9c77b7] border-2 border-[#9c77b7]/20 px-12 py-6 rounded-full text-xl font-bold shadow-lg hover:bg-white transition flex items-center justify-center">
                   Explore Menu
                 </a>
@@ -1530,6 +1552,16 @@ export default function App() {
                                 <div className="flex flex-col">
                                     <span className="text-4xl md:text-6xl font-bold text-white block mb-1 leading-none">02 9533 8849</span>
                                     <span className="text-base uppercase tracking-widest text-[#9c77b7] font-bold mt-2">Call to book anytime</span>
+                                </div>
+                            </a>
+
+                            <a href="tel:+61427139455" className="flex items-center gap-6 group">
+                                <div className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white group-hover:bg-white/15 transition shadow-sm">
+                                    <Phone size={20} />
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-white font-bold tracking-wide">Mobile: 0427 139 455 (SMS)</span>
+                                    <span className="text-white/50 text-sm">Tap to call mobile</span>
                                 </div>
                             </a>
                             
