@@ -485,7 +485,7 @@ const HERO_VIDEO_URL =
   'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Hero%20cover/Thai_princess01.mp4';
 
 const SERVICES_PANEL_VIDEO_URL =
-  'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Main/ThaiP_VDO01.mp4';
+  'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Main/princessthaimassage01.mp4';
 
 const ATMOSPHERE_VIDEO_URL =
   'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Main/cover02.mp4';
