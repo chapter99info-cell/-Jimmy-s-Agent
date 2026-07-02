@@ -6,6 +6,7 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { Phone, MapPin, Clock, Users, X, Send, Menu, Star, ChevronLeft, ChevronRight, Facebook } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
+import { MASSAGE_PRICING, MASSAGE_MINUTES, formatAud, pricingLineEn, pricingLineTh } from './config/pricing';
 
 // --- Constants & Data ---
 const SUPABASE_MIXED_BASE =
@@ -14,28 +15,28 @@ const SUPABASE_MIXED_BASE =
 const RELAXING_SERVICES = [
   { 
     duration: '30 MINS', 
-    price: '$50', 
+    price: formatAud(MASSAGE_PRICING.relaxing[30].price), 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Quick & focused aromatherapy relaxation',
     image: `${SUPABASE_MIXED_BASE}Oil02.png`,
   },
   { 
     duration: '45 MINS', 
-    price: '$70', 
+    price: formatAud(MASSAGE_PRICING.relaxing[45].price), 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Deep and continuous oil treatment',
     image: `${SUPABASE_MIXED_BASE}Oil03.png`,
   },
   { 
     duration: '60 MINS', 
-    price: '$80', 
+    price: formatAud(MASSAGE_PRICING.relaxing[60].price), 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Premium full-body rejuvenation',
     image: `${SUPABASE_MIXED_BASE}theprincessthaimassage01.png`,
   },
   { 
     duration: '90 MINS', 
-    price: '$130',
+    price: formatAud(MASSAGE_PRICING.relaxing[90].price),
     types: 'HOT OIL | COCONUT OIL',
     description: 'The ultimate 1.5 hour serene experience',
     image: `${SUPABASE_MIXED_BASE}theprincessthaimassage02.png`,
@@ -45,7 +46,7 @@ const RELAXING_SERVICES = [
 const DEEP_TISSUE_SERVICES = [
   { 
     duration: '30 MINS', 
-    price: '$70', 
+    price: formatAud(MASSAGE_PRICING.deepTissue[30].price), 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Targeted muscle recovery',
     video: 'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Price%20package/Oil01.mp4',
@@ -53,21 +54,21 @@ const DEEP_TISSUE_SERVICES = [
   },
   { 
     duration: '45 MINS', 
-    price: '$80', 
+    price: formatAud(MASSAGE_PRICING.deepTissue[45].price), 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Intense therapeutic oil session',
     image: `${SUPABASE_MIXED_BASE}Oil03.png`,
   },
   { 
     duration: '60 MINS', 
-    price: '$90', 
+    price: formatAud(MASSAGE_PRICING.deepTissue[60].price), 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Complete myofascial release',
     image: `${SUPABASE_MIXED_BASE}theprincessthaimassage01.png`,
   },
   { 
     duration: '90 MINS', 
-    price: '$140',
+    price: formatAud(MASSAGE_PRICING.deepTissue[90].price),
     types: 'HOT OIL | COCONUT OIL',
     description: 'Comprehensive recovery & restoration',
     image: `${SUPABASE_MIXED_BASE}theprincessthaimassage02.png`,
@@ -105,6 +106,11 @@ const GALLERY_TITLES = [
   "Remedial Massage Therapy",
 ];
 
+const RELAXING_PRICING_EN = MASSAGE_MINUTES.map((m) => pricingLineEn(MASSAGE_PRICING.relaxing[m])).join('\n');
+const DEEP_TISSUE_PRICING_EN = MASSAGE_MINUTES.map((m) => pricingLineEn(MASSAGE_PRICING.deepTissue[m])).join('\n');
+const RELAXING_PRICING_TH = MASSAGE_MINUTES.map((m) => pricingLineTh(MASSAGE_PRICING.relaxing[m])).join('\n');
+const DEEP_TISSUE_PRICING_TH = MASSAGE_MINUTES.map((m) => pricingLineTh(MASSAGE_PRICING.deepTissue[m])).join('\n');
+
 const SYSTEM_INSTRUCTION = `
 👑 System Instruction: The Princess Thai Massage (Bilingual Expert)
 Role: You are "Princess AI", the elegant and welcoming Digital Receptionist for The Princess Thai Massage in Riverwood. You represent a Minimal Luxury brand.
@@ -115,29 +121,17 @@ Role: You are "Princess AI", the elegant and welcoming Digital Receptionist for 
 
 2. Service Menu & Pricing (Strict List):
 • Relaxing Massage (Hot Oil & Coconut Oil):
-  - 30 Mins: $50
-  - 45 Mins: $70
-  - 60 Mins: $80
-  - 90 Mins: $130
+${RELAXING_PRICING_EN}
 • Deep Tissue Massage (Therapeutic & Muscle Recovery):
-  - 30 Mins: $70
-  - 45 Mins: $80
-  - 60 Mins: $90
-  - 90 Mins: $140
+${DEEP_TISSUE_PRICING_EN}
 *Note: We specialize in Hot Oil, Coconut Oil, and Therapeutic Relief treatments performed by professional female therapists only.*
 
 [Example Thai Response for Prices]:
 "สวัสดีค่ะ ยินดีต้อนรับสู่ คอร์สนวดพรีเมียมของ The Princess Thai Massage ค่ะ ราคาแพ็กเกจของเรามีดังนี้นะคะ:
 🌸 1. Relaxing Massage (นวดผ่อนคลายน้ำมันร้อน/น้ำมันมะพร้าว):
-• 30 นาที — $50
-• 45 นาที — $70
-• 60 นาที — $80
-• 90 นาที — $130
+${RELAXING_PRICING_TH}
 💪 2. Deep Tissue Massage (นวดเนื้อเยื่อส่วนลึกเน้นน้ำหนัก บรรเทาอาการตึงปวดเสียวตัว):
-• 30 นาที — $70
-• 45 นาที — $80
-• 60 นาที — $90
-• 90 นาที — $140
+${DEEP_TISSUE_PRICING_TH}
 สนใจจองคิวล็อกเวลาโทรหาพวกเราได้เลยที่เบอร์ 02 9533 8849 ค่ะ ✨"
 
 3. Contact & Operations:
@@ -935,26 +929,17 @@ export default function App() {
                       <p className="text-[14px] md:text-[15px] italic text-neutral-500 -mt-3">Hot Oil / Fresh Coconut Oil</p>
                       
                       <div className="space-y-4">
-                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
-                          <span className="text-neutral-700">30 Mins Treatment</span>
-                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
-                          <span className="font-bold text-amber-950 font-serif">$50</span>
-                        </div>
-                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
-                          <span className="text-neutral-700">45 Mins Treatment</span>
-                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
-                          <span className="font-bold text-amber-950 font-serif">$70</span>
-                        </div>
-                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
-                          <span className="text-neutral-700">60 Mins Treatment</span>
-                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
-                          <span className="font-bold text-amber-950 font-serif">$80</span>
-                        </div>
-                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
-                          <span className="text-neutral-700 font-bold text-[#2d1b40]">90 Mins Signature</span>
-                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
-                          <span className="font-bold text-amber-950 font-serif">$130</span>
-                        </div>
+                        {MASSAGE_MINUTES.map((minutes) => {
+                          const item = MASSAGE_PRICING.relaxing[minutes];
+                          const label = item.isSignature ? '90 Mins Signature' : `${minutes} Mins Treatment`;
+                          return (
+                            <div key={`relaxing-${minutes}`} className="flex justify-between items-baseline text-lg md:text-xl font-medium">
+                              <span className={item.isSignature ? 'text-neutral-700 font-bold text-[#2d1b40]' : 'text-neutral-700'}>{label}</span>
+                              <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
+                              <span className="font-bold text-amber-950 font-serif">{formatAud(item.price)}</span>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
 
@@ -967,26 +952,17 @@ export default function App() {
                       <p className="text-[14px] md:text-[15px] italic text-neutral-500 -mt-3">Hot Oil / Fresh Coconut Oil</p>
 
                       <div className="space-y-4">
-                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
-                          <span className="text-neutral-700">30 Mins Treatment</span>
-                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
-                          <span className="font-bold text-amber-950 font-serif">$70</span>
-                        </div>
-                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
-                          <span className="text-neutral-700">45 Mins Treatment</span>
-                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
-                          <span className="font-bold text-amber-950 font-serif">$80</span>
-                        </div>
-                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
-                          <span className="text-neutral-700">60 Mins Treatment</span>
-                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
-                          <span className="font-bold text-amber-950 font-serif">$90</span>
-                        </div>
-                        <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
-                          <span className="text-neutral-700 font-bold text-[#2d1b40]">90 Mins Signature</span>
-                          <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
-                          <span className="font-bold text-amber-950 font-serif">$140</span>
-                        </div>
+                        {MASSAGE_MINUTES.map((minutes) => {
+                          const item = MASSAGE_PRICING.deepTissue[minutes];
+                          const label = item.isSignature ? '90 Mins Signature' : `${minutes} Mins Treatment`;
+                          return (
+                            <div key={`deep-${minutes}`} className="flex justify-between items-baseline text-lg md:text-xl font-medium">
+                              <span className={item.isSignature ? 'text-neutral-700 font-bold text-[#2d1b40]' : 'text-neutral-700'}>{label}</span>
+                              <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
+                              <span className="font-bold text-amber-950 font-serif">{formatAud(item.price)}</span>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
