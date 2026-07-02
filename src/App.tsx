@@ -45,7 +45,7 @@ const RELAXING_SERVICES = [
 const DEEP_TISSUE_SERVICES = [
   { 
     duration: '30 MINS', 
-    price: '$60', 
+    price: '$70', 
     types: 'HOT OIL | COCONUT OIL',
     description: 'Targeted muscle recovery',
     video: 'https://euiwkvozrhnbxttfuchh.supabase.co/storage/v1/object/public/thai%20princess/VDO/Price%20package/Oil01.mp4',
@@ -120,7 +120,7 @@ Role: You are "Princess AI", the elegant and welcoming Digital Receptionist for 
   - 60 Mins: $80
   - 90 Mins: $130
 • Deep Tissue Massage (Therapeutic & Muscle Recovery):
-  - 30 Mins: $60
+  - 30 Mins: $70
   - 45 Mins: $80
   - 60 Mins: $90
   - 90 Mins: $140
@@ -134,14 +134,14 @@ Role: You are "Princess AI", the elegant and welcoming Digital Receptionist for 
 • 60 นาที — $80
 • 90 นาที — $130
 💪 2. Deep Tissue Massage (นวดเนื้อเยื่อส่วนลึกเน้นน้ำหนัก บรรเทาอาการตึงปวดเสียวตัว):
-• 30 นาที — $60
+• 30 นาที — $70
 • 45 นาที — $80
 • 60 นาที — $90
 • 90 นาที — $140
-สนใจจองคิวล็อกเวลาโทรหาพวกเราได้เลยที่เบอร์ 0427 139 455 ค่ะ ✨"
+สนใจจองคิวล็อกเวลาโทรหาพวกเราได้เลยที่เบอร์ 02 9533 8849 ค่ะ ✨"
 
 3. Contact & Operations:
-• Phone: 0427 139 455 (Always direct customers to call this number for bookings. We do not take bookings via chat).
+• Phone: 02 9533 8849 (Always direct customers to call this number for bookings. We do not take bookings via chat).
 • Hours: 10:00 AM – 08:30 PM (Open 7 Days).
 
 4. Location & Navigation (Anti-Residential Guide):
@@ -150,7 +150,7 @@ Role: You are "Princess AI", the elegant and welcoming Digital Receptionist for 
 • Guideline: Tell customers to stay on Belmore Road, look for our store sign, and DO NOT enter residential side streets.
 
 5. Tone & Call to Action:
-• Keep it luxury, warm, and polite. Always end the chat by inviting them to call 0427 139 455 to secure their spot.
+• Keep it luxury, warm, and polite. Always end the chat by inviting them to call 02 9533 8849 to secure their spot.
 
 6. Reviews & Testimonials (CRITICAL):
 • If a customer expresses satisfaction, praise (e.g., "ประทับใจมาก", "นวดดีมาก", "Good job", "Impressed"), or asks how to leave a review/rating, you MUST reply with this exact format:
@@ -214,7 +214,7 @@ If you have any questions, concerns, or complaints regarding this Privacy Policy
 
 The Princess Thai Massage
 Address: 186 Belmore Rd, Riverwood NSW 2210
-Phone: 0427 139 455
+Phone: 02 9533 8849
 `;
 
 const TERMS_OF_SERVICE = `
@@ -300,10 +300,10 @@ function ChatBot() {
       
       if (data.error) throw new Error(data.error);
 
-      setMessages((prev) => [...prev, { role: 'ai', text: data.text || 'I apologize, I am experiencing a connection issue. Please call us at 0427 139 455.' }]);
+      setMessages((prev) => [...prev, { role: 'ai', text: data.text || 'I apologize, I am experiencing a connection issue. Please call us at 02 9533 8849.' }]);
     } catch (error) {
       console.error('Chat error:', error);
-      setMessages((prev) => [...prev, { role: 'ai', text: 'I apologize, something went wrong. Please call us at 0427 139 455 for immediate assistance.' }]);
+      setMessages((prev) => [...prev, { role: 'ai', text: 'I apologize, something went wrong. Please call us at 02 9533 8849 for immediate assistance.' }]);
     } finally {
       setIsTyping(false);
     }
@@ -970,7 +970,7 @@ export default function App() {
                         <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
                           <span className="text-neutral-700">30 Mins Treatment</span>
                           <span className="border-b border-dotted border-neutral-400 flex-1 mx-3" />
-                          <span className="font-bold text-amber-950 font-serif">$60</span>
+                          <span className="font-bold text-amber-950 font-serif">$70</span>
                         </div>
                         <div className="flex justify-between items-baseline text-lg md:text-xl font-medium">
                           <span className="text-neutral-700">45 Mins Treatment</span>
@@ -1000,7 +1000,7 @@ export default function App() {
                     
                     <div className="flex flex-col md:flex-row justify-center items-center gap-4 text-xs md:text-sm font-bold text-[#2d1b40] pt-2">
                       <span className="flex items-center gap-1.5 justify-center">
-                        📞 Phone: 0427 139 455
+                        📞 Phone: 02 9533 8849
                       </span>
                       <span className="hidden md:inline text-neutral-300">•</span>
                       <span className="flex items-center gap-1.5 justify-center">
@@ -1066,11 +1066,11 @@ export default function App() {
             <a href="#gallery" className="hover:text-[#9c77b7] transition">Gallery</a>
             <a href="#contact" className="hover:text-[#9c77b7] transition">Contact</a>
             <a
-               href="tel:0427139455"
+               href="tel:0295338849"
                className="bg-[#9c77b7] text-white px-10 py-5 rounded-full hover:bg-[#8659a3] transition shadow-lg text-lg flex items-center gap-2"
             >
               <Phone size={24} />
-              Call 0427 139 455
+              Call 02 9533 8849
             </a>
           </div>
           <button className="md:hidden p-2 text-[#9c77b7]">
@@ -1113,9 +1113,9 @@ export default function App() {
                 Experience the ultimate comfort with our Hot Oil and Coconut Oil treatments.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
-                <a ref={ctaRef} href="tel:0427139455" className="bg-[#9c77b7] text-white px-12 py-6 rounded-full text-xl font-bold shadow-xl hover:bg-[#8659a3] transition flex items-center justify-center gap-3">
+                <a ref={ctaRef} href="tel:0295338849" className="bg-[#9c77b7] text-white px-12 py-6 rounded-full text-xl font-bold shadow-xl hover:bg-[#8659a3] transition flex items-center justify-center gap-3">
                   <Phone size={28} />
-                  CALL 0427 139 455
+                  CALL 02 9533 8849
                 </a>
                 <a href="#services" className="bg-white/80 backdrop-blur-sm text-[#9c77b7] border-2 border-[#9c77b7]/20 px-12 py-6 rounded-full text-xl font-bold shadow-lg hover:bg-white transition flex items-center justify-center">
                   Explore Menu
@@ -1547,12 +1547,12 @@ export default function App() {
                         </div>
                         
                         <div className="space-y-8">
-                            <a href="tel:0427139455" className="flex items-center gap-8 group">
+                            <a href="tel:0295338849" className="flex items-center gap-8 group">
                                 <div className="w-20 h-20 rounded-full bg-[#9c77b7] flex items-center justify-center text-white group-hover:scale-110 transition shadow-lg">
                                     <Phone size={32} />
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-4xl md:text-6xl font-bold text-white block mb-1 leading-none">0427 139 455</span>
+                                    <span className="text-4xl md:text-6xl font-bold text-white block mb-1 leading-none">02 9533 8849</span>
                                     <span className="text-base uppercase tracking-widest text-[#9c77b7] font-bold mt-2">Call to book anytime</span>
                                 </div>
                             </a>
@@ -1652,7 +1652,7 @@ export default function App() {
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           whileTap={{ scale: 0.9 }}
-          href="tel:0427139455"
+          href="tel:0295338849"
           className="w-16 h-16 bg-[#9c77b7] text-white rounded-full shadow-2xl flex items-center justify-center border-4 border-white"
         >
           <Phone size={28} />

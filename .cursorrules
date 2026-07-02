@@ -11,7 +11,7 @@ oil treatments in the Canterbury-Bankstown area.
 Business details:
 - Name: The Princess Thai Massage
 - Address: Riverwood NSW 2210
-- Phone: 0427 139 455
+- Phone: 02 9533 8849
 - Services: Hot Oil, Coconut Oil, Thai Traditional, Deep Tissue
 - Language: English primary, Thai secondary
 - Booking: phone call + walk-in (no online system)
@@ -56,7 +56,7 @@ Every page MUST include:
 - FAQ section minimum 5 Q&A:
   - "What oil do you use?" → Hot oil and coconut oil
   - "Where are you located?" → Riverwood NSW
-  - "How do I book?" → Call 0427 139 455
+  - "How do I book?" → Call 02 9533 8849
   - "Do you do couple massage?" → Yes
   - "What massage styles?" → Thai, Oil, Deep Tissue
 - NAP consistent on every page
@@ -79,7 +79,7 @@ AI-friendly content rules:
 AI Chatbot rules (when re-enabled):
 - Chatbot knows ONLY: services, prices, location, hours, booking
 - System prompt restricts to business context only
-- If asked off-topic: "Please call us at 0427 139 455"
+- If asked off-topic: "Please call us at 02 9533 8849"
 - Chatbot greeting: bilingual Thai/English
 - Disable toggle: featChatbot = false in config
 
@@ -89,7 +89,7 @@ Menu/Print Board:
 - Menu board optimized for A4 landscape printing
 
 Call button rules:
-- "CALL 0427 139 455" → tel:0427139455 link
+- "CALL 02 9533 8849" → tel:0295338849 link
 - Always visible on mobile (fixed bottom or top)
 - Large tap target: minimum 44px height
 
