@@ -10,7 +10,7 @@ type PriceTable = Record<MassageCategory, Record<MassagePriceItem['minutes'], Ma
 
 export const MASSAGE_PRICING: PriceTable = {
   relaxing: {
-    30: { minutes: 30, price: 50 },
+    30: { minutes: 30, price: 60 },
     45: { minutes: 45, price: 70 },
     60: { minutes: 60, price: 80 },
     90: { minutes: 90, price: 130, isSignature: true },
